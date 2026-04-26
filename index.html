@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>cute popup</title>
+<title>Store of Heidee</title>
 
 <style>
 * {
@@ -20,11 +20,10 @@ body {
     align-items: center;
     background: linear-gradient(-45deg, #ff4e8a, #ff004c, #ff6a88, #ff1744);
     background-size: 300% 300%;
-    animation: gradientMove 8s ease infinite;
-    overflow: hidden;
+    animation: bg 8s ease infinite;
 }
 
-@keyframes gradientMove {
+@keyframes bg {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
@@ -32,8 +31,6 @@ body {
 
 /* BUTTON */
 .click-btn {
-    position: relative;
-    overflow: hidden;
     padding: 16px 40px;
     font-size: 20px;
     border-radius: 50px;
@@ -43,28 +40,6 @@ body {
     color: #ff004c;
     font-weight: 600;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transition: 0.3s;
-}
-
-.click-btn:hover {
-    transform: translateY(-3px) scale(1.07);
-}
-
-/* RIPPLE */
-.click-btn span.ripple {
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    background: rgba(255,0,76,0.4);
-    animation: ripple 0.6s linear;
-    pointer-events: none;
-}
-
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
 }
 
 /* LOADER */
@@ -72,14 +47,12 @@ body {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(6px);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
-    z-index: 999;
 }
 
 .loader.active {
@@ -99,35 +72,15 @@ body {
     animation: bounce 1s infinite;
 }
 
-.dots span {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    margin: 5px;
-    background: #ff004c;
-    border-radius: 50%;
-    animation: blink 1.4s infinite;
-}
-
-.dots span:nth-child(2) { animation-delay: 0.2s; }
-.dots span:nth-child(3) { animation-delay: 0.4s; }
-
 @keyframes bounce {
-    0%,100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
 
-@keyframes blink {
-    0%,80%,100% { opacity: 0.3; }
-    40% { opacity: 1; }
-}
-
-/* POPUP */
+/* POPUP STORE */
 .popup {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,144 +94,148 @@ body {
     visibility: visible;
 }
 
-@keyframes glowBorder {
-    0% { box-shadow: 0 0 10px #ff004c, 0 0 20px #ff4e8a; }
-    50% { box-shadow: 0 0 25px #ff1744, 0 0 50px #ff6a88; }
-    100% { box-shadow: 0 0 10px #ff004c, 0 0 20px #ff4e8a; }
-}
-
-.popup-content {
-    background: rgba(255,255,255,0.9);
-    border-radius: 22px;
-    padding: 22px;
+.store {
+    background: white;
     width: 90%;
-    max-width: 360px;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 20px;
     text-align: center;
-    transform: scale(0.7) translateY(40px);
-    opacity: 0;
-    transition: all 0.4s ease;
-    border: 2px solid #ff4e8a;
-    animation: glowBorder 2s infinite ease-in-out;
+    animation: pop 0.4s ease;
 }
 
-.popup.active .popup-content {
-    transform: scale(1);
-    opacity: 1;
+@keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
-.popup-content img {
+/* HEADER */
+.store h1 {
+    color: #ff004c;
+    margin-bottom: 10px;
+}
+
+/* TYPEWRITER TEXT */
+.type-text {
+    font-size: 14px;
+    color: #333;
+    min-height: 40px;
+}
+
+/* PRODUCTS */
+.products {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.card {
+    background: #fff0f5;
+    padding: 10px;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
     width: 100%;
-    border-radius: 14px;
-    margin-bottom: 12px;
+    border-radius: 10px;
 }
 
+/* CLOSE */
 .close-btn {
-    padding: 11px;
+    margin-top: 15px;
+    padding: 10px;
     width: 100%;
     border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #ff4e8a, #ff004c);
+    border-radius: 12px;
+    background: #ff004c;
     color: white;
     cursor: pointer;
-}
-
-/* CONFETTI */
-.confetti {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 2px;
-    top: -10px;
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<button class="click-btn" onclick="handleClick(event)">hindot</button>
+<button class="click-btn" onclick="start()">Enter Store</button>
 
 <!-- LOADER -->
 <div class="loader" id="loader">
     <div class="cute-loader">
         <div class="face">🐱</div>
-        <div class="dots">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <p>loading...</p>
+        <p>Entering store...</p>
     </div>
 </div>
 
-<!-- POPUP -->
+<!-- STORE POPUP -->
 <div class="popup" id="popup">
-    <div class="popup-content">
-        <img src="images/myphoto.jpg">
-        <h2>Heidee</h2>
-        <p>bisaya na nigga pa, saan ka pa 😉</p>
+    <div class="store">
+        <h1>🛍️ Store of Heidee</h1>
+        <p class="type-text" id="typeText"></p>
+
+        <div class="products">
+            <div class="card">
+                <img src="https://via.placeholder.com/150">
+                <p>Cute Item 💖</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/150">
+                <p>Stylish Fit ✨</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/150">
+                <p>Sweet Stuff 🍬</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/150">
+                <p>Special Pick 🌸</p>
+            </div>
+        </div>
+
         <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
 </div>
 
 <script>
-function handleClick(e) {
-    rippleEffect(e);
-    showLoader();
-}
-
-function rippleEffect(e) {
-    const button = e.currentTarget;
-    const circle = document.createElement("span");
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-
-    circle.style.width = circle.style.height = diameter + "px";
-    circle.style.left = e.offsetX - diameter / 2 + "px";
-    circle.style.top = e.offsetY - diameter / 2 + "px";
-    circle.classList.add("ripple");
-
-    button.appendChild(circle);
-    setTimeout(() => circle.remove(), 600);
-}
-
-function showLoader() {
-    const loader = document.getElementById("loader");
-    loader.classList.add("active");
+function start() {
+    document.getElementById("loader").classList.add("active");
 
     setTimeout(() => {
-        loader.classList.remove("active");
+        document.getElementById("loader").classList.remove("active");
         openPopup();
+        typeText();
     }, 2000);
 }
 
 function openPopup() {
     document.getElementById("popup").classList.add("active");
-    launchConfetti();
 }
 
 function closePopup() {
     document.getElementById("popup").classList.remove("active");
 }
 
-function launchConfetti() {
-    for (let i = 0; i < 50; i++) {
-        let confetti = document.createElement("div");
-        confetti.classList.add("confetti");
+/* TYPEWRITER EFFECT */
+function typeText() {
+    const text = "Welcome to Heidee's Store ✨ A cute place for stylish and fun items just for you!";
+    let i = 0;
+    const speed = 40;
 
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,60%)`;
-        confetti.style.animationDuration = (Math.random()*2+2)+"s";
-
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 4000);
+    function typing() {
+        if (i < text.length) {
+            document.getElementById("typeText").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
     }
+
+    document.getElementById("typeText").innerHTML = "";
+    typing();
 }
 </script>
 
