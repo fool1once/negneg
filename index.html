@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cute UI Popup</title>
+<title>Clean Popup UI</title>
 
 <style>
 * {
@@ -18,7 +18,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    background: linear-gradient(135deg, #eef2ff, #f8fafc);
 }
 
 /* Container */
@@ -26,34 +26,26 @@ body {
     text-align: center;
 }
 
-/* Cute Button */
-.btn {
-    padding: 15px 35px;
-    font-size: 18px;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #333;
+/* Click Text */
+.click-text {
+    font-size: 22px;
+    font-weight: 600;
+    color: #4f46e5;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: 0.3s;
 }
 
-.btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    color: white;
+.click-text:hover {
+    color: #3730a3;
+    transform: scale(1.05);
 }
 
-/* Popup Background */
+/* Popup */
 .popup {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.4);
-    backdrop-filter: blur(6px);
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,63 +54,48 @@ body {
     transition: 0.3s;
 }
 
-/* Active */
 .popup.active {
     opacity: 1;
     visibility: visible;
 }
 
-/* Popup Card */
+/* Popup Content */
 .popup-content {
     background: white;
-    padding: 30px 25px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 18px;
     width: 90%;
     max-width: 350px;
-    text-align: center;
-    transform: scale(0.8);
+    transform: scale(0.85);
     transition: 0.3s;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
 .popup.active .popup-content {
     transform: scale(1);
 }
 
-/* Title */
-.popup-content h2 {
-    color: #ff758c;
+/* Image */
+.popup-content img {
+    width: 100%;
+    border-radius: 12px;
     margin-bottom: 10px;
-}
-
-/* Text */
-.popup-content p {
-    color: #555;
-    margin-bottom: 20px;
 }
 
 /* Close Button */
 .close-btn {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 10px;
     border: none;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-    color: #333;
+    border-radius: 12px;
+    background: #4f46e5;
+    color: white;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .close-btn:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    .btn {
-        font-size: 16px;
-        padding: 12px 25px;
-    }
+    background: #3730a3;
 }
 </style>
 
@@ -126,13 +103,14 @@ body {
 <body>
 
 <div class="container">
-    <button class="btn" onclick="openPopup()">I-klik ko</button>
+    <div class="click-text" onclick="openPopup()">Click to View 💫</div>
 </div>
 
+<!-- Popup -->
 <div class="popup" id="popup">
     <div class="popup-content">
-        <h2 id="popupTitle">Hi there ✨</h2>
-        <p id="popupMessage">This is your cute and professional popup!</p>
+        <!-- 🔥 THIS IS YOUR GITHUB IMAGE -->
+        <img src="images/myphoto.jpg" alt="Popup Image">
         <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
 </div>
@@ -140,10 +118,6 @@ body {
 <script>
 function openPopup() {
     document.getElementById("popup").classList.add("active");
-
-    // ✨ Customize here
-    document.getElementById("popupTitle").innerText = "Bisaya Nigs";
-    document.getElementById("popupMessage").innerText = "By fool";
 }
 
 function closePopup() {
