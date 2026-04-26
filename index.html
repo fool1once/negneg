@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>bisaya nigs</title>
+<title>cute popup</title>
 
 <style>
 * {
@@ -24,14 +24,13 @@ body {
     overflow: hidden;
 }
 
-/* Background animation */
 @keyframes gradientMove {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
 }
 
-/* Button */
+/* BUTTON */
 .click-btn {
     position: relative;
     overflow: hidden;
@@ -51,7 +50,7 @@ body {
     transform: translateY(-3px) scale(1.07);
 }
 
-/* Ripple effect */
+/* RIPPLE */
 .click-btn span.ripple {
     position: absolute;
     border-radius: 50%;
@@ -68,7 +67,62 @@ body {
     }
 }
 
-/* Popup */
+/* LOADER */
+.loader {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+.loader.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cute-loader {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.face {
+    font-size: 40px;
+    animation: bounce 1s infinite;
+}
+
+.dots span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 5px;
+    background: #ff004c;
+    border-radius: 50%;
+    animation: blink 1.4s infinite;
+}
+
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes blink {
+    0%,80%,100% { opacity: 0.3; }
+    40% { opacity: 1; }
+}
+
+/* POPUP */
 .popup {
     position: fixed;
     inset: 0;
@@ -87,17 +141,14 @@ body {
     visibility: visible;
 }
 
-/* Glow Border Animation */
 @keyframes glowBorder {
     0% { box-shadow: 0 0 10px #ff004c, 0 0 20px #ff4e8a; }
     50% { box-shadow: 0 0 25px #ff1744, 0 0 50px #ff6a88; }
     100% { box-shadow: 0 0 10px #ff004c, 0 0 20px #ff4e8a; }
 }
 
-/* Popup Card */
 .popup-content {
     background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(15px);
     border-radius: 22px;
     padding: 22px;
     width: 90%;
@@ -111,28 +162,16 @@ body {
 }
 
 .popup.active .popup-content {
-    transform: scale(1) translateY(0);
+    transform: scale(1);
     opacity: 1;
 }
 
-/* Image */
 .popup-content img {
     width: 100%;
     border-radius: 14px;
     margin-bottom: 12px;
 }
 
-/* Text */
-.popup-content h2 {
-    color: #ff004c;
-}
-
-.popup-content p {
-    color: #333;
-    margin-bottom: 15px;
-}
-
-/* Close */
 .close-btn {
     padding: 11px;
     width: 100%;
@@ -141,14 +180,9 @@ body {
     background: linear-gradient(135deg, #ff4e8a, #ff004c);
     color: white;
     cursor: pointer;
-    transition: 0.25s;
 }
 
-.close-btn:hover {
-    transform: scale(1.05);
-}
-
-/* Confetti */
+/* CONFETTI */
 .confetti {
     position: fixed;
     width: 6px;
@@ -169,13 +203,27 @@ body {
 
 <body>
 
-<button class="click-btn" onclick="handleClick(event)">hindot</button>
+<button class="click-btn" onclick="handleClick(event)">click me</button>
 
+<!-- LOADER -->
+<div class="loader" id="loader">
+    <div class="cute-loader">
+        <div class="face">🐱</div>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <p>loading...</p>
+    </div>
+</div>
+
+<!-- POPUP -->
 <div class="popup" id="popup">
     <div class="popup-content">
-        <img src="images/myphoto.jpg" alt="Image">
-        <h2>Heidee: Bisaya, Buang, Baliw, NIGGA.</h2>
-        <p>fool to nigs.</p>
+        <img src="images/myphoto.jpg">
+        <h2>Hello 😆</h2>
+        <p>your popup is here!</p>
         <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
 </div>
@@ -183,7 +231,7 @@ body {
 <script>
 function handleClick(e) {
     rippleEffect(e);
-    openPopup();
+    showLoader();
 }
 
 function rippleEffect(e) {
@@ -197,8 +245,17 @@ function rippleEffect(e) {
     circle.classList.add("ripple");
 
     button.appendChild(circle);
-
     setTimeout(() => circle.remove(), 600);
+}
+
+function showLoader() {
+    const loader = document.getElementById("loader");
+    loader.classList.add("active");
+
+    setTimeout(() => {
+        loader.classList.remove("active");
+        openPopup();
+    }, 2000);
 }
 
 function openPopup() {
@@ -216,14 +273,10 @@ function launchConfetti() {
         confetti.classList.add("confetti");
 
         confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor = 
-            `hsl(${Math.random()*360}, 100%, 60%)`;
-
-        confetti.style.animationDuration = 
-            (Math.random() * 2 + 2) + "s";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,60%)`;
+        confetti.style.animationDuration = (Math.random()*2+2)+"s";
 
         document.body.appendChild(confetti);
-
         setTimeout(() => confetti.remove(), 4000);
     }
 }
