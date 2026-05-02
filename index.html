@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Store of Heidee</title>
+<title>Heidee</title>
 
 <style>
 * {
@@ -14,230 +14,121 @@
 }
 
 body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(-45deg, #ff4e8a, #ff004c, #ff6a88, #ff1744);
-    background-size: 300% 300%;
-    animation: bg 8s ease infinite;
-}
-
-@keyframes bg {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-
-/* BUTTON */
-.click-btn {
-    padding: 16px 40px;
-    font-size: 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    background: white;
-    color: #ff004c;
-    font-weight: 600;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-/* LOADER */
-.loader {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-.loader.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.cute-loader {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
     text-align: center;
-}
-
-.face {
-    font-size: 40px;
-    animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-    50% { transform: translateY(-10px); }
-}
-
-/* POPUP STORE */
-.popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-.popup.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.store {
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    animation: pop 0.4s ease;
-}
-
-@keyframes pop {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
 }
 
 /* HEADER */
-.store h1 {
-    color: #ff004c;
-    margin-bottom: 10px;
+header {
+    padding: 80px 20px;
 }
 
-/* TYPEWRITER TEXT */
-.type-text {
-    font-size: 14px;
-    color: #333;
-    min-height: 40px;
+h1 {
+    font-size: 60px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.7);
 }
 
-/* PRODUCTS */
-.products {
-    margin-top: 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+.subtitle {
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* CARD SECTION */
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 40px;
+    gap: 20px;
 }
 
 .card {
-    background: #fff0f5;
-    padding: 10px;
-    border-radius: 12px;
-    transition: 0.2s;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    width: 250px;
+    transition: 0.3s;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 30px rgba(255,255,255,0.5);
 }
 
-.card img {
-    width: 100%;
-    border-radius: 10px;
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
-/* CLOSE */
-.close-btn {
-    margin-top: 15px;
-    padding: 10px;
-    width: 100%;
+.card p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 30px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 12px;
-    background: #ff004c;
-    color: white;
+    border-radius: 30px;
+    background: white;
+    color: #ff6b81;
+    font-weight: bold;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff6b81;
+    color: white;
+    box-shadow: 0 0 15px #ff6b81;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    font-size: 14px;
+    opacity: 0.8;
 }
 </style>
 </head>
 
 <body>
 
-<button class="click-btn" onclick="start()">Enter Store</button>
+<header>
+    <h1>Heidee ✨</h1>
+    <p class="subtitle">A soft place where smiles, memories, and love stay forever 💗</p>
+    <button class="btn">You make everything beautiful</button>
+</header>
 
-<!-- LOADER -->
-<div class="loader" id="loader">
-    <div class="cute-loader">
-        <div class="face">🐱</div>
-        <p>Entering store...</p>
+<div class="container">
+
+    <div class="card">
+        <h2>🌸 Smile</h2>
+        <p>Your smile is literally my favorite thing in the world.</p>
     </div>
+
+    <div class="card">
+        <h2>💫 Vibes</h2>
+        <p>Being with you feels calm, soft, and safe—like home.</p>
+    </div>
+
+    <div class="card">
+        <h2>💖 Special</h2>
+        <p>Out of everyone, you're the one I’d always choose.</p>
+    </div>
+
 </div>
 
-<!-- STORE POPUP -->
-<div class="popup" id="popup">
-    <div class="store">
-        <h1>🛍️ Store of Heidee</h1>
-        <p class="type-text" id="typeText"></p>
-
-        <div class="products">
-            <div class="card">
-                <img src="https://via.placeholder.com/150">
-                <p>Cute Item 💖</p>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/150">
-                <p>Stylish Fit ✨</p>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/150">
-                <p>Sweet Stuff 🍬</p>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/150">
-                <p>Special Pick 🌸</p>
-            </div>
-        </div>
-
-        <button class="close-btn" onclick="closePopup()">Close</button>
-    </div>
-</div>
-
-<script>
-function start() {
-    document.getElementById("loader").classList.add("active");
-
-    setTimeout(() => {
-        document.getElementById("loader").classList.remove("active");
-        openPopup();
-        typeText();
-    }, 2000);
-}
-
-function openPopup() {
-    document.getElementById("popup").classList.add("active");
-}
-
-function closePopup() {
-    document.getElementById("popup").classList.remove("active");
-}
-
-/* TYPEWRITER EFFECT */
-function typeText() {
-    const text = "Welcome to Heidee's Store ✨ A cute place for stylish and fun items just for you!";
-    let i = 0;
-    const speed = 40;
-
-    function typing() {
-        if (i < text.length) {
-            document.getElementById("typeText").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, speed);
-        }
-    }
-
-    document.getElementById("typeText").innerHTML = "";
-    typing();
-}
-</script>
+<footer>
+    Made with 💗 just for Heidee
+</footer>
 
 </body>
 </html>
