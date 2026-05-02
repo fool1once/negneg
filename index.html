@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heidee</title>
+<title>Heidee 💗</title>
 
 <style>
 * {
@@ -15,86 +15,112 @@
 
 body {
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #fff;
+    color: white;
     text-align: center;
+    overflow-x: hidden;
+}
+
+/* FLOATING PARTICLES */
+.particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
 }
 
 /* HEADER */
 header {
-    padding: 80px 20px;
+    padding: 50px 15px;
 }
 
 h1 {
-    font-size: 60px;
-    letter-spacing: 3px;
-    text-shadow: 0 0 15px rgba(255,255,255,0.7);
+    font-size: 40px;
 }
 
-.subtitle {
-    margin-top: 10px;
-    font-size: 18px;
-    opacity: 0.9;
-}
-
-/* CARD SECTION */
-.container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 40px;
-    gap: 20px;
-}
-
-.card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(10px);
+/* IMAGE */
+.image-container {
+    width: 220px;
+    height: 220px;
+    margin: 20px auto;
+    overflow: hidden;
     border-radius: 20px;
-    padding: 25px;
-    width: 250px;
-    transition: 0.3s;
-    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    position: relative;
 }
 
-.card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 0 30px rgba(255,255,255,0.5);
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.card h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
+.image-container:hover img {
+    transform: scale(1.15) rotate(2deg);
 }
 
-.card p {
-    font-size: 14px;
-    opacity: 0.9;
+/* LIGHT FOLLOW EFFECT */
+.image-container::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
-/* BUTTON */
+/* BUTTONS */
 .btn {
-    margin-top: 30px;
-    padding: 12px 25px;
+    margin: 8px;
+    padding: 10px 18px;
+    border-radius: 20px;
     border: none;
-    border-radius: 30px;
+    cursor: pointer;
     background: white;
     color: #ff6b81;
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-.btn:hover {
-    background: #ff6b81;
-    color: white;
-    box-shadow: 0 0 15px #ff6b81;
+#messageBox {
+    margin-top: 15px;
+    min-height: 25px;
 }
 
-/* FOOTER */
+/* SECRET BOX */
+.secret-box {
+    margin-top: 25px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
 footer {
-    margin-top: 50px;
-    padding: 20px;
+    margin-top: 40px;
+    padding: 15px;
     font-size: 14px;
-    opacity: 0.8;
+}
+
+/* MOBILE */
+@media(max-width:500px){
+    h1 { font-size: 30px; }
+    .image-container {
+        width: 180px;
+        height: 180px;
+    }
 }
 </style>
 </head>
@@ -102,33 +128,90 @@ footer {
 <body>
 
 <header>
-    <h1>Heidee ✨</h1>
-    <p class="subtitle">A soft place where smiles, memories, and love stay forever 💗</p>
-    <button class="btn">You make everything beautiful</button>
+    <h1>Heidee 💗</h1>
+    <p>You make everything feel soft ✨</p>
 </header>
 
-<div class="container">
+<!-- IMAGE -->
+<div class="image-container" id="imgBox">
+    <img src="images/myphoto.jpg" alt="Heidee">
+</div>
 
-    <div class="card">
-        <h2>🌸 Smile</h2>
-        <p>Your smile is literally my favorite thing in the world.</p>
-    </div>
+<!-- BUTTONS -->
+<div>
+    <button class="btn" onclick="showMessage()">Message 💌</button>
+    <button class="btn" onclick="changeColor()">Change Theme 🎨</button>
+</div>
 
-    <div class="card">
-        <h2>💫 Vibes</h2>
-        <p>Being with you feels calm, soft, and safe—like home.</p>
-    </div>
+<div id="messageBox"></div>
 
-    <div class="card">
-        <h2>💖 Special</h2>
-        <p>Out of everyone, you're the one I’d always choose.</p>
-    </div>
-
+<!-- SECRET PUZZLE -->
+<div class="secret-box">
+    <p>🔐 Enter the secret word:</p>
+    <input type="text" id="secretInput" placeholder="hint: something sweet">
+    <button class="btn" onclick="unlockSecret()">Unlock</button>
+    <p id="secretMessage"></p>
 </div>
 
 <footer>
-    Made with 💗 just for Heidee
+    Made with love 💖
 </footer>
+
+<script>
+// PARTICLES
+for(let i=0;i<25;i++){
+    let p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random()*100 + "vw";
+    p.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(p);
+}
+
+// CURSOR LIGHT
+const box = document.getElementById("imgBox");
+box.addEventListener("mousemove", (e) => {
+    const rect = box.getBoundingClientRect();
+    box.style.setProperty("--x", e.clientX - rect.left + "px");
+    box.style.setProperty("--y", e.clientY - rect.top + "px");
+});
+
+// MESSAGES
+function showMessage() {
+    const messages = [
+        "You’re my favorite notification 💕",
+        "You make everything better ✨",
+        "I like you. A lot. 💗",
+        "You’re my safe place 🌸"
+    ];
+    document.getElementById("messageBox").innerText =
+        messages[Math.floor(Math.random()*messages.length)];
+}
+
+// THEME
+function changeColor() {
+    const colors = [
+        "linear-gradient(135deg,#ff9a9e,#fad0c4)",
+        "linear-gradient(135deg,#a18cd1,#fbc2eb)",
+        "linear-gradient(135deg,#f6d365,#fda085)"
+    ];
+    document.body.style.background =
+        colors[Math.floor(Math.random()*colors.length)];
+}
+
+// SECRET PUZZLE
+function unlockSecret(){
+    const input = document.getElementById("secretInput").value.toLowerCase();
+    const secret = "love"; // you can change this
+
+    if(input === secret){
+        document.getElementById("secretMessage").innerText =
+        "💖 You unlocked it… I really like you, Heidee.";
+    } else {
+        document.getElementById("secretMessage").innerText =
+        "❌ Wrong... try again 😊";
+    }
+}
+</script>
 
 </body>
 </html>
