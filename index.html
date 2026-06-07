@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Servando // CRT Glitch Collective</title>
+  <title>Servando // CRT Glitch // minimalist</title>
 
   <!-- bold typography + industrial retro -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -140,7 +140,7 @@
     }
 
     /* =========================
-       MAIN TEXT BLOCK (ALIGNED + STRUCTURED)
+       MAIN TEXT BLOCK (minimalist alignment, tight spacing)
     ========================= */
     .container {
       position: relative;
@@ -172,7 +172,7 @@
       position: relative;
       display: inline-block;
       transform-origin: center;
-      margin-bottom: 0.1em;
+      margin-bottom: 0; /* tighter */
       line-height: 1.1;
     }
 
@@ -204,27 +204,22 @@
       animation: rgbShiftAfter 0.25s infinite alternate;
     }
 
-    /* ----- ONTOP SUBTITLE (POWER MOVE) ----- */
+    /* ----- ONTOP SUBTITLE (smaller, minimal, solid color + glitch effects) ----- */
     .subtitle {
       font-family: 'Anton', sans-serif;
-      font-size: 4vw;
-      letter-spacing: 6px;
+      font-size: 3.2vw;        /* smaller than before (was 4vw) */
+      letter-spacing: 4px;
       text-transform: uppercase;
-      color: #f0f0f0;
-      text-shadow: 0 0 8px rgba(255, 80, 120, 0.8), 0 0 18px rgba(0, 180, 255, 0.4);
-      margin-top: 0.15em;
-      margin-bottom: 0.4em;
-      background: linear-gradient(135deg, #fff, #ddd);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: none;
+      color: #ffffff;           /* solid white — no gradient color shift */
+      text-shadow: 0 0 8px rgba(255, 80, 120, 0.7), 0 0 12px rgba(0, 180, 255, 0.3);
+      margin-top: 0.05em;       /* very close to SERVANDO */
+      margin-bottom: 0.25em;    /* reduced gap to names */
       position: relative;
       display: inline-block;
       animation: subtitleFlicker 3s infinite;
     }
     
-    /* extra glitch personality for ONTOP */
+    /* ghost glitch overlay (keeps effect) */
     .subtitle::before {
       content: "ONTOP";
       position: absolute;
@@ -232,60 +227,58 @@
       left: 0;
       width: 100%;
       height: 100%;
-      color: #ff66aa;
+      color: #ff88aa;
       opacity: 0;
       clip-path: polygon(0 30%, 100% 0%, 100% 70%, 0 100%);
       animation: subtitleGhost 2.2s infinite alternate;
     }
 
-    /* ----- NAMES / COLLECTIVE (clean alignment fix) ----- */
+    /* ----- NAMES / COLLECTIVE (NO BLACK CIRCLE, completely minimal) ----- */
     .names-collective {
-      margin-top: 1.2rem;
+      margin-top: 0.4rem;       /* tighter */
       width: 100%;
       text-align: center;
     }
 
     .name-strip {
       font-family: 'Space Mono', 'Courier New', monospace;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 500;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       color: #e6e6e6;
       text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(2px);
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      border-radius: 40px;
-      box-shadow: 0 0 12px rgba(255, 70, 130, 0.3), inset 0 0 3px rgba(255,255,200,0.3);
+      background: transparent;   /* NO black background, no circle */
+      backdrop-filter: none;
+      padding: 0;                /* no pill padding */
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
       word-break: break-word;
       white-space: normal;
       max-width: 95vw;
-      line-height: 1.6;
-      border: 1px solid rgba(255, 120, 150, 0.4);
-      transition: all 0.2s ease;
+      line-height: 1.5;
+      transition: all 0.1s ease;
+      text-shadow: 0 0 4px rgba(255,255,200,0.3);
     }
 
-    /* each name gets subtle spacing, fixing alignment for commas */
+    /* simple inline spacing for names */
     .name-strip span {
       display: inline-block;
       margin: 0 0.1rem;
     }
 
-    /* responsive: better spacing on mobile */
+    /* responsive: text scales nicely */
     @media (max-width: 700px) {
       .glitch-text {
         font-size: 15vw;
         letter-spacing: 5px;
       }
       .subtitle {
-        font-size: 7vw;
-        letter-spacing: 3px;
+        font-size: 5vw;        /* smaller on mobile */
+        letter-spacing: 2px;
       }
       .name-strip {
-        font-size: 0.85rem;
-        padding: 0.7rem 1rem;
-        letter-spacing: 0.5px;
+        font-size: 0.75rem;
       }
       .container {
         padding: 0 1rem;
@@ -294,12 +287,14 @@
 
     @media (max-width: 480px) {
       .name-strip {
-        font-size: 0.7rem;
-        padding: 0.6rem 0.8rem;
-        line-height: 1.5;
+        font-size: 0.65rem;
+        line-height: 1.4;
       }
       .glitch-text {
         letter-spacing: 3px;
+      }
+      .subtitle {
+        font-size: 6vw;
       }
     }
 
@@ -327,14 +322,14 @@
 
     @keyframes subtitleGhost {
       0% { opacity: 0; transform: translateX(-2px); }
-      100% { opacity: 0.7; transform: translateX(3px); text-shadow: -2px 0 #ff3366; }
+      100% { opacity: 0.6; transform: translateX(3px); text-shadow: -2px 0 #ff3366; }
     }
 
     @keyframes subtitleFlicker {
       0%, 80%, 100% { opacity: 1; }
       84% { opacity: 0.7; }
       86% { opacity: 1; }
-      92% { opacity: 0.9; letter-spacing: 5px; }
+      92% { opacity: 0.9; letter-spacing: 4px; }
     }
 
     /* =========================
@@ -400,7 +395,7 @@
     }
 
     /* =========================
-       HEAVY GLITCH EXTENSION FOR ALL TEXT (ALIGNMENT PROTECTED)
+       HEAVY GLITCH EXTENSION (affects all text but keeps minimal styling)
     ========================= */
     .global-glitch {
       animation: heavyCrashGlitch 0.12s cubic-bezier(0.2, 0.9, 0.8, 0.1) forwards !important;
@@ -423,9 +418,8 @@
     }
 
     .global-glitch .name-strip {
-      transform: skewX(-1.5deg) translateX(-3px);
-      filter: blur(0.4px);
-      background: rgba(0, 0, 0, 0.7);
+      transform: skewX(-1.2deg) translateX(-2px);
+      filter: blur(0.3px);
     }
 
     .global-glitch .glitch-text::before,
@@ -464,7 +458,7 @@
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="lava.mp4" type="video/mp4">
-      <!-- fallback texture is invisible but background black serves -->
+      <!-- fallback: black background -->
     </video>
   </div>
 
@@ -488,35 +482,29 @@
   <!-- FLASH for heavy glitch -->
   <div class="glitch-flash" id="glitchFlash"></div>
 
-  <!-- MAIN TEXT GROUP: ALIGNMENT FIXED & STRUCTURED -->
+  <!-- MAIN TEXT GROUP: minimalist tight alignment, no background circles -->
   <div class="container">
     <!-- primary glitch name -->
     <div class="glitch-text">SERVANDO</div>
     
-    <!-- ONTOP with extra retro style -->
+    <!-- ONTOP smaller, solid color + glitch preservation -->
     <div class="subtitle">ONTOP</div>
     
-    <!-- Collective names: alignment absolutely centered, comma separated clean -->
+    <!-- Collective names: NO BLACK CIRCLE, pure minimal typography -->
     <div class="names-collective">
-      <div class="name-strip" id="nameList">
-        <!-- javascript will populate correctly to ensure perfect alignment and comma management -->
-      </div>
+      <div class="name-strip" id="nameList"></div>
     </div>
   </div>
 
   <script>
     (function() {
       // ========================
-      //  NAME LIST FROM IMAGE CONTEXT
-      //  "EYB,AERI,KELL,CIEL,SHANE,YHELL,ZENFLO,CHI,TATI,YE,MARY"
+      // NAME LIST: perfectly aligned, comma separated, no background
       // ========================
-      const rawNames = "EYB, AERI, KELL, CIEL, SHANE, YHELL, ZENFLO, CHI, TATI, YE, MARY";
-      // we ensure proper spacing and display with inner spans for alignment & style consistency
+      const rawNames = "EYB, AERI, KELL, CIEL, SHANE, YHELL, ZENFLO, CHI, TATI, YE";
       const nameContainer = document.getElementById('nameList');
       if (nameContainer) {
-        // split by commas and trim spaces
         const namesArray = rawNames.split(',').map(n => n.trim());
-        // build with spans and commas between them (last no trailing comma)
         nameContainer.innerHTML = '';
         namesArray.forEach((name, idx) => {
           const nameSpan = document.createElement('span');
@@ -534,10 +522,9 @@
             nameContainer.appendChild(commaSpan);
           }
         });
-        // extra polish: force upper case consistency
       }
 
-      // --- OLD TV HEAVY GLITCH ENGINE (PRESERVE FULL INTENSITY) ---
+      // --- OLD TV HEAVY GLITCH ENGINE (preserves immersion) ---
       const bodyEl = document.body;
       const flashEl = document.getElementById('glitchFlash');
       
@@ -554,7 +541,6 @@
         }, 130);
       }
       
-      // random heavy glitch schedule (2.8 - 8.2 sec)
       let glitchTimeout;
       function scheduleGlitch() {
         const minDelay = 2800;
@@ -566,7 +552,7 @@
         }, nextGlitchIn);
       }
       
-      // micro glitch texture (subtle interference, color shift)
+      // subtle interference (micro glitch)
       function subtleInterference() {
         if (Math.random() > 0.68) return;
         const tempOverlay = document.createElement('div');
@@ -637,7 +623,7 @@
         }, 2300);
       }
       
-      // scanline intensity modulation
+      // scanline intensity modulation (vintage)
       function varyScanlineOpac() {
         const scan = document.querySelector('.scanlines');
         if (scan) {
@@ -652,22 +638,20 @@
         if (Math.random() > 0.8) varyScanlineOpac();
       }, 3200);
       
-      // video handling
       const videoEl = document.querySelector('video');
       if (videoEl) {
-        videoEl.play().catch(e => console.log('video autoplay blocked, visual still works'));
+        videoEl.play().catch(e => console.log('video autoplay blocked, visuals still work'));
       }
       
-      // start chaos engines
       scheduleGlitch();
       startMicroGlitchRain();
       startBarDisruption();
       
-      // additional flicker on name-strip sometimes (alignment friendly)
+      // extra name strip subtle flicker (no background)
       function nameStripFlicker() {
         const nameStrip = document.querySelector('.name-strip');
         if (nameStrip && Math.random() > 0.8) {
-          nameStrip.style.transform = 'translateX(2px)';
+          nameStrip.style.transform = 'translateX(1px)';
           nameStrip.style.opacity = '0.9';
           setTimeout(() => {
             if (nameStrip) {
@@ -679,7 +663,7 @@
       }
       setInterval(nameStripFlicker, 2400);
       
-      // text shadow micro-glitch for SERVANDO (maintained)
+      // text shadow micro-glitch for SERVANDO (maintains effect)
       function textShadowFlicker() {
         const glitchElem = document.querySelector('.glitch-text');
         if (glitchElem && Math.random() > 0.75) {
@@ -694,7 +678,7 @@
       }
       setInterval(textShadowFlicker, 1700);
       
-      // video color bleeding effect
+      // video color bleeding
       function videoColorBleed() {
         if (videoEl && Math.random() > 0.85) {
           videoEl.style.filter = 'contrast(1.4) saturate(1.6) hue-rotate(3deg) brightness(0.7)';
@@ -705,34 +689,25 @@
       }
       setInterval(videoColorBleed, 2800);
       
-      // final alignment & safety: ensure name strip never overflows or breaks container badly
-      window.addEventListener('resize', () => {
-        const containerDiv = document.querySelector('.container');
-        if (containerDiv) {
-          // just forced reflow not needed, but keep responsive
-        }
-      });
-      
-      // prevent text clipping: if any overflow due to extreme scaling (just protection)
-      const styleCheck = () => {
+      // responsiveness and safety
+      const adjustFontIfNeeded = () => {
         const nameStrip = document.querySelector('.name-strip');
         if (nameStrip && nameStrip.scrollWidth > window.innerWidth - 40) {
-          nameStrip.style.fontSize = '0.75rem';
+          nameStrip.style.fontSize = '0.7rem';
         } else if (nameStrip) {
           nameStrip.style.fontSize = '';
         }
       };
-      setTimeout(styleCheck, 100);
-      window.addEventListener('resize', styleCheck);
+      setTimeout(adjustFontIfNeeded, 100);
+      window.addEventListener('resize', adjustFontIfNeeded);
       
-      // clean memory on unload
       window.addEventListener('beforeunload', () => {
         if (glitchTimeout) clearTimeout(glitchTimeout);
         if (microInterval) clearInterval(microInterval);
         if (barInterval) clearInterval(barInterval);
       });
       
-      console.log('🎥 CRT GLITCH ACTIVE // SERVANDO · ONTOP · COLLECTIVE ALIGNMENT FIXED');
+      console.log('🎧 minimalist CRT // SERVANDO | ONTOP | no black circles, tight spacing');
     })();
   </script>
 </body>
