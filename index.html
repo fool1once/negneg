@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SERVANDO ON TOP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Servando // CRT Glitch Vision</title>
 
+  <!-- Minimalist & bold typography -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
   <style>
@@ -12,19 +13,22 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      user-select: none; /* keeps immersive feel */
     }
 
     body {
       height: 100vh;
+      width: 100vw;
       overflow: hidden;
       background: black;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
 
     /* =========================
-       VIDEO BACKGROUND
+       VIDEO BACKGROUND (CINEMATIC + GRIT)
     ========================= */
     .video-bg {
       position: absolute;
@@ -40,60 +44,131 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: contrast(1.2) saturate(1.1) brightness(0.8);
+      filter: contrast(1.25) saturate(1.15) brightness(0.75);
+      transition: filter 0.05s linear;
     }
 
-    /* dark cinematic overlay */
+    /* Dark cinematic vignette + subtle CRT curvature */
     .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.75) 100%);
       z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: multiply;
     }
 
-    /* scanlines (TV effect) */
+    /* Scanlines (authentic TV raster effect) */
     .scanlines {
       position: absolute;
       width: 100%;
       height: 100%;
       background: repeating-linear-gradient(
         0deg,
-        rgba(255,255,255,0.03),
-        rgba(255,255,255,0.03) 1px,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
         transparent 2px,
         transparent 4px
       );
       z-index: 2;
       pointer-events: none;
       mix-blend-mode: overlay;
+      opacity: 0.6;
+    }
+
+    /* Old TV grain / noise texture (subtle static) */
+    .grain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.04) 1.2px, transparent 1.2px);
+      background-size: 6px 6px;
+      background-repeat: repeat;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+      animation: subtleNoise 0.25s infinite;
+    }
+
+    /* CRT inner shadow / curvature */
+    .crt-curve {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 45px rgba(0,0,0,0.9), inset 0 0 15px rgba(0,0,0,0.5);
+      border-radius: 0px;
+      pointer-events: none;
+      z-index: 4;
     }
 
     /* =========================
-       TEXT
+       GLITCH BARS (horizontal tracking lines / VHS style)
+    ========================= */
+    .bar {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.9);
+      opacity: 0;
+      z-index: 6;
+      filter: blur(0.6px);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      animation: barGlitch 3.2s infinite cubic-bezier(0.8, 0, 0.2, 1);
+    }
+
+    .bar:nth-child(1) { top: 18%; animation-delay: 0.1s; height: 2px; background: #ffaa88; }
+    .bar:nth-child(2) { top: 35%; animation-delay: 1.2s; height: 4px; background: #aaffff; opacity: 0.8; }
+    .bar:nth-child(3) { top: 52%; animation-delay: 0.7s; height: 2px; background: #ffffff; }
+    .bar:nth-child(4) { top: 68%; animation-delay: 2s; height: 3px; background: #ff66aa; }
+    .bar:nth-child(5) { top: 84%; animation-delay: 0.4s; height: 2px; background: #ffffff; }
+    .bar:nth-child(6) { top: 94%; animation-delay: 1.8s; height: 3px; background: #88ffcc; opacity: 0.6; }
+
+    @keyframes barGlitch {
+      0%, 92%, 100% { opacity: 0; transform: translateX(-100%); }
+      94% { opacity: 0.9; transform: translateX(5%); }
+      95% { opacity: 0.4; transform: translateX(15%); }
+      96% { opacity: 1; transform: translateX(0%); }
+      97% { opacity: 0; transform: translateX(80%); }
+    }
+
+    /* =========================
+       MAIN TEXT (ANTON + LAYERED GLITCH)
     ========================= */
     .container {
       position: relative;
-      z-index: 5;
+      z-index: 10;
       text-align: center;
+      width: 100%;
+      padding: 0 1rem;
+      pointer-events: none;
     }
 
     .glitch-text {
       font-family: 'Anton', sans-serif;
       font-size: 12vw;
       color: white;
-      letter-spacing: 10px;
+      letter-spacing: 12px;
       text-transform: uppercase;
       text-shadow:
-        0 0 15px rgba(255,255,255,0.8),
-        0 0 35px rgba(255,255,255,0.4);
-      animation: glitch 0.3s infinite;
+        0 0 12px rgba(255,255,255,0.9),
+        0 0 28px rgba(255,0,100,0.6),
+        0 0 5px rgba(255,255,255,0.5);
+      animation: textGlitchMove 0.22s infinite steps(1);
       position: relative;
+      display: inline-block;
+      transform-origin: center;
     }
 
-    /* RGB glitch layers */
+    /* RGB split layers (old TV chromatic aberration) */
     .glitch-text::before,
     .glitch-text::after {
       content: "SERVANDO";
@@ -103,76 +178,396 @@
       width: 100%;
       height: 100%;
       color: white;
-      opacity: 0.6;
+      opacity: 0.65;
+      background: transparent;
     }
 
     .glitch-text::before {
-      transform: translate(2px, 0);
-      text-shadow: -2px 0 red;
+      transform: translate(3px, 1px);
+      text-shadow: -3px 0 #ff3366;
       clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      animation: rgbShiftBefore 0.3s infinite alternate;
     }
 
     .glitch-text::after {
-      transform: translate(-2px, 0);
-      text-shadow: 2px 0 cyan;
+      transform: translate(-3px, -1px);
+      text-shadow: 3px 0 #33ccff;
       clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+      animation: rgbShiftAfter 0.25s infinite alternate;
     }
 
-    @keyframes glitch {
-      0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-2px, 1px); }
-      94% { transform: translate(2px, -1px); }
-      96% { transform: translate(-1px, 1px); }
-      98% { transform: translate(1px, -1px); }
+    @keyframes textGlitchMove {
+      0%, 88%, 100% { transform: translate(0, 0); }
+      90% { transform: translate(-1.5px, 1px); }
+      92% { transform: translate(2px, -1.5px); }
+      94% { transform: translate(-2px, 1.2px); }
+      96% { transform: translate(1px, -1px); }
+      98% { transform: translate(-1px, 0.8px); }
     }
 
-    /* glitch bars */
-    .bar {
+    @keyframes rgbShiftBefore {
+      0% { transform: translate(2px, 0); clip-path: polygon(0 0, 100% 0, 100% 42%, 0 42%); }
+      100% { transform: translate(4px, 1px); clip-path: polygon(0 0, 100% 0, 100% 48%, 0 48%); }
+    }
+
+    @keyframes rgbShiftAfter {
+      0% { transform: translate(-2px, 0); clip-path: polygon(0 58%, 100% 58%, 100% 100%, 0 100%); }
+      100% { transform: translate(-4px, 1px); clip-path: polygon(0 52%, 100% 52%, 100% 100%, 0 100%); }
+    }
+
+    /* occasional full-frame flicker (CRT warmth) */
+    .flicker-overlay {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 2px;
-      background: white;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+      z-index: 5;
+      animation: crtFlicker 0.2s infinite;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes crtFlicker {
+      0%, 90%, 100% { opacity: 0; }
+      93% { opacity: 0.12; }
+      95% { opacity: 0.06; }
+      97% { opacity: 0.15; }
+    }
+
+    /* =========================
+       HEAVY RANDOM GLITCH (TV SEIZURE / VHS DROP) 
+       JAVASCRIPT TRIGGERED - OLD TV CHAOS
+    ========================= */
+    .global-glitch {
+      animation: heavyCrashGlitch 0.12s cubic-bezier(0.2, 0.9, 0.8, 0.1) forwards !important;
+    }
+
+    .global-glitch .video-bg video {
+      filter: contrast(1.8) saturate(2) hue-rotate(8deg) brightness(0.6) !important;
+    }
+
+    .global-glitch .glitch-text {
+      animation: none;
+      transform: skewX(3deg) translateY(3px);
+      filter: blur(0.8px);
+    }
+
+    .global-glitch .glitch-text::before,
+    .global-glitch .glitch-text::after {
+      opacity: 0.9;
+      filter: blur(1px);
+    }
+
+    @keyframes heavyCrashGlitch {
+      0% {
+        transform: translate(0, 0);
+        filter: contrast(1) saturate(1);
+      }
+      20% {
+        transform: translate(8px, -4px) skewX(4deg);
+        filter: contrast(1.6) saturate(1.8) hue-rotate(12deg);
+      }
+      40% {
+        transform: translate(-10px, 5px) skewX(-3deg);
+        filter: contrast(1.9) saturate(2.2) hue-rotate(-8deg);
+      }
+      60% {
+        transform: translate(6px, -2px) skewX(2deg);
+        filter: contrast(1.2) saturate(1.4) hue-rotate(5deg);
+      }
+      80% {
+        transform: translate(-4px, 3px) skewX(-2deg);
+        filter: contrast(1.5) saturate(1.6) brightness(1.2);
+      }
+      100% {
+        transform: translate(0, 0);
+        filter: contrast(1) saturate(1);
+      }
+    }
+
+    /* flash for heavy glitch (white / cyan interference) */
+    .glitch-flash {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,240,200,0.5) 0%, rgba(0,255,255,0.2) 100%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 20;
       opacity: 0;
-      z-index: 4;
-      animation: bar 2.5s infinite;
+      transition: opacity 0.02s linear;
     }
 
-    .bar:nth-child(1) { top: 20%; animation-delay: 0.2s; }
-    .bar:nth-child(2) { top: 40%; animation-delay: 1s; }
-    .bar:nth-child(3) { top: 60%; animation-delay: 0.6s; }
-    .bar:nth-child(4) { top: 80%; animation-delay: 1.4s; }
-
-    @keyframes bar {
-      0%, 95%, 100% { opacity: 0; transform: translateX(-100%); }
-      96% { opacity: 0.8; transform: translateX(0); }
-      97% { opacity: 0; transform: translateX(100%); }
+    /* Additional quick jitter lines for extra realism */
+    .extra-interference {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(90deg, 
+        rgba(255,255,255,0) 0px,
+        rgba(255,0,80,0.08) 2px,
+        rgba(255,255,255,0) 6px,
+        rgba(0,200,255,0.06) 10px,
+        transparent 14px);
+      z-index: 7;
+      pointer-events: none;
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+      animation: hScanlineMove 6s linear infinite;
     }
 
+    @keyframes hScanlineMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 80px 0; }
+    }
+
+    /* subtle pulse on screen edges */
+    .vhs-pulse {
+      position: absolute;
+      inset: 0;
+      box-shadow: 0 0 25px rgba(255, 0, 80, 0.2) inset;
+      pointer-events: none;
+      z-index: 12;
+      animation: edgePulse 4s infinite;
+    }
+
+    @keyframes edgePulse {
+      0% { box-shadow: 0 0 15px rgba(255, 0, 80, 0.1) inset; }
+      50% { box-shadow: 0 0 30px rgba(255, 60, 120, 0.25) inset; }
+      100% { box-shadow: 0 0 15px rgba(255, 0, 80, 0.1) inset; }
+    }
+
+    /* responsive text spacing */
+    @media (max-width: 768px) {
+      .glitch-text {
+        letter-spacing: 6px;
+      }
+      .bar:nth-child(2), .bar:nth-child(4) {
+        height: 2px;
+      }
+    }
   </style>
 </head>
-
 <body>
 
-  <!-- VIDEO BACKGROUND -->
+  <!-- VIDEO BACKGROUND (LAVA / CINEMATIC) -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="lava.mp4" type="video/mp4">
+      <!-- fallback text / transparency, but file assumed present -->
     </video>
   </div>
 
+  <!-- LAYERS: old TV realism -->
   <div class="overlay"></div>
   <div class="scanlines"></div>
+  <div class="grain"></div>
+  <div class="crt-curve"></div>
+  <div class="flicker-overlay"></div>
+  <div class="extra-interference"></div>
+  <div class="vhs-pulse"></div>
 
-  <!-- glitch bars -->
+  <!-- GLITCH BARS (tracking lines, white/colorful) -->
+  <div class="bar"></div>
+  <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
 
-  <!-- TEXT -->
+  <!-- FLASH ELEMENT FOR HEAVY GLITCH -->
+  <div class="glitch-flash" id="glitchFlash"></div>
+
+  <!-- MAIN TEXT : SERVANDO (glitch driven) -->
   <div class="container">
     <div class="glitch-text">SERVANDO</div>
   </div>
 
+  <script>
+    (function() {
+      // --- OLD TV HEAVY GLITCH SIMULATOR (RANDOM INTERVALS) ---
+      // mimics vintage VHS tape drop, color shift, frame tear
+      const bodyEl = document.body;
+      const flashEl = document.getElementById('glitchFlash');
+      
+      // function to trigger a heavy, crunchy glitch effect
+      function triggerHeavyGlitch() {
+        // add class that triggers heavy distortion
+        bodyEl.classList.add('global-glitch');
+        
+        // flash effect: white+cyan quick burst
+        if (flashEl) {
+          flashEl.style.opacity = '0.65';
+          setTimeout(() => {
+            if (flashEl) flashEl.style.opacity = '0';
+          }, 55);
+        }
+        
+        // additional aggressive micro-shake for the text container? just stays with global class
+        // remove glitch class after short duration (feels like analog interference)
+        setTimeout(() => {
+          bodyEl.classList.remove('global-glitch');
+        }, 130); // short but intense
+        
+        // sometimes double-hit? extra random spark? no need, but keep natural
+      }
+      
+      // random interval between heavy glitches (between 2.5 and 8 seconds)
+      let glitchTimeout;
+      
+      function scheduleGlitch() {
+        const minDelay = 2800;   // 2.8 sec
+        const maxDelay = 8200;   // 8.2 sec
+        const nextGlitchIn = Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
+        glitchTimeout = setTimeout(() => {
+          triggerHeavyGlitch();
+          scheduleGlitch(); // recursive scheduling for continuous old TV feeling
+        }, nextGlitchIn);
+      }
+      
+      // Also trigger an extra "micro glitch" sometimes in between? gives more organic TV feel
+      // but we also can create minor interference without full heavy crash
+      function subtleInterference() {
+        if (Math.random() > 0.68) return; // 32% chance
+        // quick micro flicker / color shift without full heavy class
+        const tempOverlay = document.createElement('div');
+        tempOverlay.style.position = 'absolute';
+        tempOverlay.style.top = '0';
+        tempOverlay.style.left = '0';
+        tempOverlay.style.width = '100%';
+        tempOverlay.style.height = '100%';
+        tempOverlay.style.backgroundColor = 'rgba(255, 70, 120, 0.12)';
+        tempOverlay.style.mixBlendMode = 'screen';
+        tempOverlay.style.pointerEvents = 'none';
+        tempOverlay.style.zIndex = '25';
+        document.body.appendChild(tempOverlay);
+        
+        // also skew text container very briefly
+        const textContainer = document.querySelector('.glitch-text');
+        if (textContainer) {
+          textContainer.style.transform = 'skewX(1.5deg) translateX(2px)';
+          setTimeout(() => {
+            if (textContainer) textContainer.style.transform = '';
+          }, 45);
+        }
+        
+        setTimeout(() => {
+          if (tempOverlay && tempOverlay.remove) tempOverlay.remove();
+        }, 50);
+      }
+      
+      // random micro glitches (every 1.2 - 3 seconds) for extra texture
+      let microInterval;
+      function startMicroGlitchRain() {
+        microInterval = setInterval(() => {
+          subtleInterference();
+        }, 1900);
+      }
+      
+      // additional: occasional single bar flash (like tracking noise) to increase authenticity
+      function randomBarFlash() {
+        const bars = document.querySelectorAll('.bar');
+        if (bars.length) {
+          const randomIndex = Math.floor(Math.random() * bars.length);
+          const randomBar = bars[randomIndex];
+          if (randomBar) {
+            randomBar.style.animation = 'none';
+            randomBar.style.opacity = '0.95';
+            randomBar.style.transform = 'translateX(2%)';
+            setTimeout(() => {
+              if (randomBar) {
+                randomBar.style.animation = '';
+                randomBar.style.opacity = '';
+                randomBar.style.transform = '';
+              }
+            }, 60);
+          }
+        }
+      }
+      
+      // set occasional extra bar disruption (every 2-5 secs)
+      let barInterval;
+      function startBarDisruption() {
+        barInterval = setInterval(() => {
+          if (Math.random() > 0.6) {
+            randomBarFlash();
+          }
+        }, 2300);
+      }
+      
+      // subtle scanline intensity modulation (vintage effect)
+      let scanlineMod = true;
+      function varyScanlineOpac() {
+        const scan = document.querySelector('.scanlines');
+        if (scan) {
+          const newOp = 0.55 + Math.random() * 0.2;
+          scan.style.opacity = newOp;
+          setTimeout(() => {
+            if (scan) scan.style.opacity = '0.6';
+          }, 180);
+        }
+      }
+      setInterval(() => {
+        if (Math.random() > 0.8) varyScanlineOpac();
+      }, 3200);
+      
+      // Sync with video to ensure it runs smooth (if video fails, still fine)
+      const videoEl = document.querySelector('video');
+      if (videoEl) {
+        videoEl.play().catch(e => console.log('video autoplay blocked, but effect remains'));
+      }
+      
+      // START GLITCH MACHINE: old TV feels alive
+      scheduleGlitch();
+      startMicroGlitchRain();
+      startBarDisruption();
+      
+      // ensure that after user click/tap (for mobile) no interruption, just for safety
+      // also cleanup if needed (no big memory leaks)
+      window.addEventListener('beforeunload', () => {
+        if (glitchTimeout) clearTimeout(glitchTimeout);
+        if (microInterval) clearInterval(microInterval);
+        if (barInterval) clearInterval(barInterval);
+      });
+      
+      // bonus: add random rgb shadow flicker on text for extra rawness
+      let textShadowMod = true;
+      function textShadowFlicker() {
+        const glitchElem = document.querySelector('.glitch-text');
+        if (glitchElem && Math.random() > 0.75) {
+          const r = Math.floor(Math.random() * 30);
+          const g = Math.floor(Math.random() * 30);
+          const b = Math.floor(Math.random() * 40);
+          glitchElem.style.textShadow = `0 0 6px rgba(255,${100+r},${80+r},0.9), 0 0 18px rgba(${r},${g},255,0.7)`;
+          setTimeout(() => {
+            if (glitchElem) {
+              glitchElem.style.textShadow = '';
+            }
+          }, 70);
+        }
+      }
+      setInterval(textShadowFlicker, 1700);
+      
+      // extra VHS color bleeding effect: sometimes apply slight filter to video
+      function videoColorBleed() {
+        if (videoEl && Math.random() > 0.85) {
+          videoEl.style.filter = 'contrast(1.4) saturate(1.6) hue-rotate(3deg) brightness(0.7)';
+          setTimeout(() => {
+            if (videoEl) videoEl.style.filter = '';
+          }, 90);
+        }
+      }
+      setInterval(videoColorBleed, 2800);
+      
+      // quick callback to make body never overflow, ensure retro feel
+      console.log('🧪 OLD TV GLITCH ACTIVE — SERVANDO // 3AM AESTHETIC');
+    })();
+  </script>
 </body>
 </html>
