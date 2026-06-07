@@ -20,86 +20,274 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background: #000;
+      background: #0a0a0a;
+      position: relative;
     }
 
-    /* REAL LIQUID BACKGROUND */
-    .liquid {
+    /* Liquid blob background container */
+    .liquid-bg {
       position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      filter: blur(80px) contrast(120%);
-      animation: move 12s ease-in-out infinite alternate;
-    }
-
-    .liquid::before,
-    .liquid::after {
-      content: "";
-      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 30% 30%, #39ff14, transparent 40%),
-                  radial-gradient(circle at 70% 40%, #00ffff, transparent 40%),
-                  radial-gradient(circle at 50% 70%, #ff00ff, transparent 40%),
-                  radial-gradient(circle at 80% 80%, #ff6600, transparent 40%);
-      mix-blend-mode: screen;
-      animation: flow 10s ease-in-out infinite alternate;
+      filter: blur(60px) contrast(1.2);
+      overflow: hidden;
     }
 
-    .liquid::after {
-      animation-duration: 14s;
-      opacity: 0.7;
+    /* Organic blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 15s infinite ease-in-out;
     }
 
-    @keyframes move {
-      0%   { transform: translate(0,0) scale(1); }
-      50%  { transform: translate(-5%, -5%) scale(1.1); }
-      100% { transform: translate(5%, 5%) scale(1); }
+    .blob:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: #39ff14;
+      top: -200px;
+      left: -100px;
+      animation-delay: 0s;
+      animation-duration: 20s;
     }
 
-    @keyframes flow {
-      0% {
-        transform: rotate(0deg) scale(1);
+    .blob:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      background: #ffff00;
+      top: 50%;
+      right: -150px;
+      animation-delay: -5s;
+      animation-duration: 18s;
+    }
+
+    .blob:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      background: #ff6600;
+      bottom: -100px;
+      left: 20%;
+      animation-delay: -10s;
+      animation-duration: 22s;
+    }
+
+    .blob:nth-child(4) {
+      width: 350px;
+      height: 350px;
+      background: #ff1493;
+      top: 20%;
+      left: 40%;
+      animation-delay: -7s;
+      animation-duration: 16s;
+    }
+
+    .blob:nth-child(5) {
+      width: 450px;
+      height: 450px;
+      background: #7f00ff;
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -3s;
+      animation-duration: 25s;
+    }
+
+    .blob:nth-child(6) {
+      width: 300px;
+      height: 300px;
+      background: #00ff88;
+      top: 60%;
+      left: 10%;
+      animation-delay: -12s;
+      animation-duration: 19s;
+    }
+
+    .blob:nth-child(7) {
+      width: 550px;
+      height: 550px;
+      background: #ff4500;
+      top: -100px;
+      right: 20%;
+      animation-delay: -8s;
+      animation-duration: 21s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      }
+      25% {
+        transform: translate(50px, -50px) scale(1.1) rotate(90deg);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
       }
       50% {
-        transform: rotate(180deg) scale(1.2);
+        transform: translate(-30px, 30px) scale(0.9) rotate(180deg);
+        border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%;
       }
-      100% {
-        transform: rotate(360deg) scale(1);
+      75% {
+        transform: translate(40px, 20px) scale(1.05) rotate(270deg);
+        border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
       }
     }
 
-    /* DARK OVERLAY (like video depth) */
-    .overlay {
+    /* Scan lines overlay */
+    .scanlines {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.4);
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
     }
 
-    /* TEXT */
-    .title {
+    /* Vignette */
+    .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Main text container */
+    .container {
       position: relative;
-      z-index: 2;
+      z-index: 20;
+      text-align: center;
+    }
+
+    /* Pure white text with VHS glitch */
+    .glitch-text {
+      position: relative;
       font-family: 'Anton', sans-serif;
       font-size: 14vw;
       color: #ffffff;
       text-transform: uppercase;
-      letter-spacing: 6px;
-      text-align: center;
+      letter-spacing: 8px;
+      text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.3);
+      animation: textGlitch 0.3s infinite;
     }
 
+    /* RGB split layers - subtle */
+    .glitch-text::before,
+    .glitch-text::after {
+      content: "CIEL ON TOP";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Anton', sans-serif;
+      font-size: 14vw;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      color: #ffffff;
+    }
+
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff0000;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      animation: glitchRed 2s infinite linear alternate-reverse;
+      opacity: 0.6;
+    }
+
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: 2px 0 #00ffff;
+      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+      animation: glitchBlue 2s infinite linear alternate-reverse;
+      opacity: 0.6;
+    }
+
+    @keyframes textGlitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, 1px); }
+      98% { transform: translate(1px, -1px); }
+    }
+
+    @keyframes glitchRed {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 1px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+    }
+
+    @keyframes glitchBlue {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(2px, -1px); }
+      40% { transform: translate(-2px, 1px); }
+      60% { transform: translate(1px, -1px); }
+      80% { transform: translate(-1px, 1px); }
+    }
+
+    /* Horizontal glitch bars */
+    .glitch-bar {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      animation: glitchBar 2.5s infinite;
+    }
+
+    .glitch-bar:nth-child(1) { top: 25%; animation-delay: 0.3s; }
+    .glitch-bar:nth-child(2) { top: 45%; animation-delay: 0.9s; }
+    .glitch-bar:nth-child(3) { top: 65%; animation-delay: 1.5s; }
+    .glitch-bar:nth-child(4) { top: 85%; animation-delay: 0.6s; }
+
+    @keyframes glitchBar {
+      0%, 95%, 100% { opacity: 0; transform: translateX(-100%); }
+      96% { opacity: 0.7; transform: translateX(0); }
+      97% { opacity: 0; transform: translateX(100%); }
+    }
   </style>
 </head>
 
 <body>
-
-  <div class="liquid"></div>
-  <div class="overlay"></div>
-
-  <div class="title">CIEL ON TOP</div>
-
+  <div class="liquid-bg">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+  
+  <div class="vignette"></div>
+  <div class="scanlines"></div>
+  
+  <div class="container">
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-text">CIEL ON TOP</div>
+  </div>
 </body>
 </html>
