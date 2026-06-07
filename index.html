@@ -10,243 +10,225 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none; /* avoid text selection glitch distractions */
     }
 
     body {
       height: 100vh;
       width: 100%;
       overflow: hidden;
-      background: #000000; /* deep black base for neon contrast */
+      background: #000000;
       position: relative;
     }
 
-    /* ---------- EXACT LIQUID NEON BACKGROUND (from YT reference) ---------- */
-    /* This creates flowing, melting neon colors with extreme blur + contrast,
-       multiple layers of organic warping + moving highlights, exactly like
-       "moving liquid with neon" vibe from the video link. */
-    .neon-liquid {
+    /* ============================================ */
+    /* EXACT LIQUID / LAVA LAMP NEON BACKGROUND    */
+    /* Deep dark background + floating liquid blobs */
+    /* Like the YouTube video "3 AM - Baby Blood"  */
+    /* ============================================ */
+    .liquid-background {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background: #000000;
       overflow: hidden;
       z-index: 0;
-      background: radial-gradient(circle at 30% 40%, #0a0f1e, #000000);
     }
 
-    /* main fluid / liquid warp layers */
-    .fluid-layer {
-      position: absolute;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
-      filter: blur(55px) contrast(1.8);
-      mix-blend-mode: screen;
-      animation: liquidFlow 22s infinite alternate ease-in-out;
-    }
-
-    .fluid-layer-1 {
-      background: radial-gradient(circle at 30% 40%, #ff00cc, #3300ff, #00ffff);
-      opacity: 0.9;
-      animation-duration: 18s;
-    }
-
-    .fluid-layer-2 {
-      background: repeating-radial-gradient(circle at 70% 60%, #ff4400, #ff00aa, #00ddff, #aa00ff);
-      opacity: 0.7;
-      animation-duration: 25s;
-      animation-direction: alternate-reverse;
-      filter: blur(65px) contrast(1.5);
-    }
-
-    .fluid-layer-3 {
-      background: conic-gradient(from 0deg at 50% 50%, #ff0066, #ffcc00, #33ffcc, #ff0066);
-      opacity: 0.8;
-      animation-duration: 20s;
-      filter: blur(70px) contrast(1.9);
-      mix-blend-mode: plus-lighter;
-    }
-
-    /* dynamic distortion shapes that move like liquid metamorphosis */
-    .liquid-blob {
+    /* Floating liquid blobs - lava lamp style */
+    .lava-blob {
       position: absolute;
       border-radius: 45%;
-      filter: blur(45px) contrast(1.4);
-      background: linear-gradient(125deg, #ff4d00, #ff00de, #00e0ff);
-      opacity: 0.65;
-      animation: morphLiquid 14s infinite alternate cubic-bezier(0.45, 0.05, 0.2, 0.99);
-      mix-blend-mode: screen;
+      filter: blur(40px) contrast(1.6);
+      opacity: 0.75;
+      animation: floatLava 12s infinite alternate ease-in-out;
+      will-change: transform, border-radius;
     }
 
-    .liquid-blob:nth-child(1) {
-      width: 75vmax;
-      height: 75vmax;
-      top: -20%;
-      left: -30%;
-      background: radial-gradient(circle, #ff44cc, #2200ff);
-      animation-duration: 19s;
+    /* Neon cyan blob */
+    .lava-blob:nth-child(1) {
+      width: 450px;
+      height: 450px;
+      background: #00ffff;
+      box-shadow: 0 0 80px rgba(0, 255, 255, 0.4);
+      top: 10%;
+      left: -100px;
+      animation-duration: 14s;
+      animation-delay: 0s;
     }
 
-    .liquid-blob:nth-child(2) {
-      width: 90vmin;
-      height: 90vmin;
-      bottom: -30%;
-      right: -20%;
-      background: radial-gradient(circle, #00ffcc, #ff00aa);
-      animation-duration: 21s;
+    /* Neon pink/magenta blob */
+    .lava-blob:nth-child(2) {
+      width: 380px;
+      height: 380px;
+      background: #ff00ff;
+      box-shadow: 0 0 70px rgba(255, 0, 255, 0.4);
+      bottom: 5%;
+      right: -80px;
+      animation-duration: 16s;
       animation-delay: -3s;
     }
 
-    .liquid-blob:nth-child(3) {
-      width: 80vmax;
-      height: 80vmax;
-      top: 30%;
-      left: 20%;
-      background: radial-gradient(ellipse, #ffaa33, #ff33cc, #00aaff);
-      animation-duration: 17s;
+    /* Neon yellow/orange blob */
+    .lava-blob:nth-child(3) {
+      width: 500px;
+      height: 500px;
+      background: #ffaa00;
+      box-shadow: 0 0 90px rgba(255, 170, 0, 0.35);
+      top: 40%;
+      left: 30%;
+      animation-duration: 18s;
       animation-delay: -7s;
-      opacity: 0.7;
     }
 
-    .liquid-blob:nth-child(4) {
-      width: 65vmax;
-      height: 65vmax;
-      bottom: 10%;
-      left: -10%;
-      background: radial-gradient(circle, #ff0066, #7700ff);
-      animation-duration: 24s;
+    /* Deep purple/blue blob */
+    .lava-blob:nth-child(4) {
+      width: 420px;
+      height: 420px;
+      background: #8a2be2;
+      box-shadow: 0 0 75px rgba(138, 43, 226, 0.5);
+      bottom: 20%;
+      left: -50px;
+      animation-duration: 15s;
+      animation-delay: -5s;
+    }
+
+    /* Neon green blob */
+    .lava-blob:nth-child(5) {
+      width: 350px;
+      height: 350px;
+      background: #39ff14;
+      box-shadow: 0 0 60px rgba(57, 255, 20, 0.4);
+      top: 60%;
+      right: 10%;
+      animation-duration: 13s;
       animation-delay: -2s;
     }
 
-    .liquid-blob:nth-child(5) {
-      width: 110vmin;
-      height: 110vmin;
-      top: -5%;
-      right: 5%;
-      background: conic-gradient(from 90deg, #0affff, #ff77aa, #ffaa22);
-      animation-duration: 27s;
-      filter: blur(55px);
-    }
-
-    /* adds liquid / neon streaks moving across the screen (like fluid ribbons) */
-    .neon-streak {
-      position: absolute;
-      background: linear-gradient(90deg, transparent, #ff44ff, #00ffff, #ffaa44, transparent);
-      width: 150%;
-      height: 70%;
-      filter: blur(35px);
-      opacity: 0.4;
-      border-radius: 100%;
-      transform: rotate(25deg);
-      animation: slideLiquid 14s infinite alternate;
-      mix-blend-mode: screen;
-    }
-
-    .streak-1 {
-      top: -30%;
-      left: -50%;
-      animation-duration: 11s;
-      opacity: 0.5;
-    }
-
-    .streak-2 {
-      bottom: -20%;
-      right: -60%;
-      transform: rotate(-15deg);
-      background: linear-gradient(90deg, transparent, #00ddff, #ff55ff, #ffbb22);
+    /* Hot pink/red blob */
+    .lava-blob:nth-child(6) {
+      width: 400px;
+      height: 400px;
+      background: #ff1493;
+      box-shadow: 0 0 80px rgba(255, 20, 147, 0.45);
+      top: -80px;
+      right: 20%;
       animation-duration: 17s;
-      animation-delay: -4s;
+      animation-delay: -10s;
     }
 
-    /* core animations for fluid motion */
-    @keyframes liquidFlow {
-      0% {
-        transform: translate(-5%, -5%) scale(1) rotate(0deg);
-        filter: blur(55px) contrast(1.7);
-      }
-      35% {
-        transform: translate(8%, 3%) scale(1.08) rotate(6deg);
-        filter: blur(60px) contrast(1.9);
-      }
-      70% {
-        transform: translate(-3%, 9%) scale(0.95) rotate(-4deg);
-        filter: blur(58px) contrast(1.75);
-      }
-      100% {
-        transform: translate(4%, -4%) scale(1.05) rotate(3deg);
-        filter: blur(65px) contrast(1.85);
-      }
+    /* Electric blue blob */
+    .lava-blob:nth-child(7) {
+      width: 320px;
+      height: 320px;
+      background: #0066ff;
+      box-shadow: 0 0 70px rgba(0, 102, 255, 0.5);
+      bottom: -50px;
+      left: 40%;
+      animation-duration: 19s;
+      animation-delay: -1s;
     }
 
-    @keyframes morphLiquid {
+    /* Neon teal blob */
+    .lava-blob:nth-child(8) {
+      width: 370px;
+      height: 370px;
+      background: #00ffcc;
+      box-shadow: 0 0 65px rgba(0, 255, 204, 0.4);
+      top: 25%;
+      right: 25%;
+      animation-duration: 14.5s;
+      animation-delay: -6s;
+    }
+
+    /* Lava lamp floating animation */
+    @keyframes floatLava {
       0% {
-        border-radius: 60% 40% 30% 70% / 55% 45% 55% 45%;
-        transform: translate(0, 0) scale(1);
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 45% 55% 40% 60% / 50% 45% 55% 50%;
       }
       25% {
-        border-radius: 40% 60% 70% 30% / 40% 55% 45% 60%;
-        transform: translate(3%, -4%) scale(1.05);
+        transform: translate(40px, -30px) scale(1.08) rotate(5deg);
+        border-radius: 55% 45% 60% 40% / 40% 55% 45% 60%;
       }
       50% {
-        border-radius: 55% 45% 45% 55% / 65% 35% 65% 35%;
-        transform: translate(-4%, 2%) scale(0.96);
+        transform: translate(-30px, 40px) scale(0.92) rotate(-3deg);
+        border-radius: 60% 40% 35% 65% / 55% 50% 50% 45%;
       }
       75% {
-        border-radius: 35% 65% 55% 45% / 30% 60% 40% 70%;
-        transform: translate(5%, 5%) scale(1.03);
+        transform: translate(25px, 25px) scale(1.04) rotate(8deg);
+        border-radius: 40% 60% 65% 35% / 45% 60% 40% 55%;
       }
       100% {
-        border-radius: 60% 40% 30% 70% / 55% 45% 55% 45%;
-        transform: translate(-2%, -3%) scale(0.98);
+        transform: translate(-15px, -20px) scale(0.97) rotate(-5deg);
+        border-radius: 50% 50% 45% 55% / 60% 40% 60% 40%;
       }
     }
 
-    @keyframes slideLiquid {
-      0% {
-        transform: translateX(-20%) rotate(25deg) scale(1);
-        opacity: 0.2;
-      }
-      50% {
-        transform: translateX(20%) rotate(28deg) scale(1.2);
-        opacity: 0.55;
-      }
-      100% {
-        transform: translateX(-10%) rotate(22deg) scale(0.9);
-        opacity: 0.3;
-      }
-    }
-
-    /* extra high-speed neon flicker / shimmer (liquid "neon" vibration) */
-    .neon-flicker {
+    /* Additional floating small "droplets" for lava lamp effect */
+    .droplet {
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.08), transparent 70%);
-      pointer-events: none;
-      z-index: 2;
-      mix-blend-mode: overlay;
-      animation: flickerPulse 0.9s infinite alternate;
+      border-radius: 50%;
+      filter: blur(25px);
+      opacity: 0.5;
+      animation: dropletFloat 8s infinite alternate;
     }
 
-    @keyframes flickerPulse {
-      0% { opacity: 0.1; }
-      100% { opacity: 0.35; }
+    .droplet:nth-child(1) {
+      width: 120px;
+      height: 120px;
+      background: #ff66cc;
+      top: 15%;
+      left: 60%;
+      animation-duration: 11s;
+    }
+    .droplet:nth-child(2) {
+      width: 90px;
+      height: 90px;
+      background: #66ffcc;
+      bottom: 30%;
+      right: 20%;
+      animation-duration: 9s;
+      animation-delay: -2s;
+    }
+    .droplet:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      background: #ffaa44;
+      top: 70%;
+      left: 15%;
+      animation-duration: 13s;
+      animation-delay: -5s;
+    }
+    .droplet:nth-child(4) {
+      width: 80px;
+      height: 80px;
+      background: #aa66ff;
+      top: 45%;
+      right: 40%;
+      animation-duration: 7s;
+      animation-delay: -1s;
     }
 
-    /* Vignette + scanlines for CRT / VHS texture (but background remains pure neon liquid) */
+    @keyframes dropletFloat {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      100% { transform: translate(30px, -40px) scale(1.3); opacity: 0.6; }
+    }
+
+    /* Very subtle vignette to keep focus on liquid blobs (dark edges) */
     .vignette {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.45) 90%);
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
       pointer-events: none;
-      z-index: 4;
+      z-index: 2;
     }
 
+    /* Light scanlines for texture, doesn't wash out background */
     .scanlines {
       position: absolute;
       top: 0;
@@ -255,20 +237,19 @@
       height: 100%;
       background: repeating-linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.1) 0px,
-        rgba(0, 0, 0, 0.1) 2px,
+        transparent,
         transparent 2px,
-        transparent 5px
+        rgba(0, 0, 0, 0.12) 2px,
+        rgba(0, 0, 0, 0.12) 4px
       );
       pointer-events: none;
-      z-index: 5;
-      opacity: 0.55;
+      z-index: 3;
     }
 
-    /* Main text container — PURE WHITE, no color in text */
+    /* Main text container - pure white, no color */
     .container {
       position: relative;
-      z-index: 30;
+      z-index: 20;
       text-align: center;
       display: flex;
       justify-content: center;
@@ -278,29 +259,25 @@
       pointer-events: none;
     }
 
-    /* pure white glitch text — NO ADDITIONAL COLORS, exactly as requested.
-       Only white with subtle white glitch effects, no color casts. */
+    /* PURE WHITE TEXT - exactly as requested, no color tints */
     .glitch-text {
       position: relative;
       font-family: 'Anton', sans-serif;
-      font-size: 13vw;
+      font-size: 12vw;
       font-weight: 400;
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 12px;
       text-shadow: 
-        0 0 12px rgba(255, 255, 255, 0.9),
-        0 0 25px rgba(255, 255, 255, 0.6),
-        0 0 45px rgba(255, 255, 255, 0.3);
-      animation: whiteGlitchShift 0.22s infinite;
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.5);
+      animation: subtleGlitch 0.28s infinite;
       white-space: nowrap;
       padding: 0 20px;
-      backdrop-filter: blur(2px); /* helps readability but background liquid remains clear */
+      background: transparent;
     }
 
-    /* RGB split but without adding actual color: just white offset + transparency
-       This gives glitch effect but text stays pure white in perception (no red/cyan tint visible clearly)
-       Using white with slight luminance difference, but no hue, matching "don't put color in text" */
+    /* Glitch layers - but pure white only, no red/cyan */
     .glitch-text::before,
     .glitch-text::after {
       content: "CIEL ON TOP";
@@ -310,130 +287,136 @@
       width: 100%;
       height: 100%;
       font-family: 'Anton', sans-serif;
-      font-size: 13vw;
+      font-size: 12vw;
       letter-spacing: 12px;
       text-transform: uppercase;
       color: #ffffff;
       background: transparent;
-      text-shadow: 0 0 5px rgba(255,255,255,0.8);
     }
 
-    /* purely white-shifted glitch layers — no color */
     .glitch-text::before {
       left: 2px;
-      clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
-      opacity: 0.55;
-      transform: translateX(-1.5px);
-      animation: glitchWhite1 0.25s infinite alternate;
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+      opacity: 0.6;
+      transform: translateX(-1px);
+      animation: glitchShift1 0.3s infinite alternate;
     }
 
     .glitch-text::after {
       left: -2px;
-      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-      opacity: 0.55;
-      transform: translateX(1.5px);
-      animation: glitchWhite2 0.23s infinite alternate;
+      clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+      opacity: 0.6;
+      transform: translateX(1px);
+      animation: glitchShift2 0.27s infinite alternate;
     }
 
-    @keyframes whiteGlitchShift {
-      0%, 100% { transform: translate(0, 0) skew(0deg); }
-      2% { transform: translate(-1px, 0.5px) skew(0.5deg); }
-      4% { transform: translate(1px, -0.3px) skew(-0.3deg); }
-      6% { transform: translate(-0.5px, 0.2px) skew(0.2deg); }
-      8% { transform: translate(0.8px, -0.1px) skew(0deg); }
-      10%, 90% { transform: translate(0,0); }
+    @keyframes subtleGlitch {
+      0%, 90%, 100% { transform: translate(0, 0); }
+      92% { transform: translate(-1px, 0.5px); }
+      94% { transform: translate(1px, -0.3px); }
+      96% { transform: translate(-0.5px, 0.2px); }
+      98% { transform: translate(0.5px, -0.1px); }
     }
 
-    @keyframes glitchWhite1 {
+    @keyframes glitchShift1 {
       0% { transform: translateX(-1px); opacity: 0.5; }
       100% { transform: translateX(2px); opacity: 0.7; }
     }
 
-    @keyframes glitchWhite2 {
+    @keyframes glitchShift2 {
       0% { transform: translateX(1px); opacity: 0.5; }
       100% { transform: translateX(-2px); opacity: 0.7; }
     }
 
-    /* Glitch bars (horizontal disruption) — pure white bars, no extra color */
+    /* Horizontal glitch bars - pure white */
     .glitch-bar {
       position: absolute;
       left: 0;
       width: 100%;
       height: 2px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.85);
       opacity: 0;
-      z-index: 35;
+      z-index: 25;
       pointer-events: none;
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
-      animation: glitchBarMotion 2.8s infinite;
+      box-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+      animation: barGlitch 2.5s infinite;
     }
 
-    .glitch-bar:nth-child(1) { top: 22%; animation-delay: 0.2s; }
-    .glitch-bar:nth-child(2) { top: 44%; animation-delay: 0.9s; }
-    .glitch-bar:nth-child(3) { top: 63%; animation-delay: 1.7s; }
-    .glitch-bar:nth-child(4) { top: 81%; animation-delay: 0.5s; }
-    .glitch-bar:nth-child(5) { top: 35%; animation-delay: 1.2s; height: 1px; background: #fff; }
-    .glitch-bar:nth-child(6) { top: 72%; animation-delay: 2.1s; }
+    .glitch-bar:nth-child(1) { top: 20%; animation-delay: 0.3s; }
+    .glitch-bar:nth-child(2) { top: 45%; animation-delay: 1.1s; }
+    .glitch-bar:nth-child(3) { top: 65%; animation-delay: 0.7s; }
+    .glitch-bar:nth-child(4) { top: 80%; animation-delay: 1.8s; }
+    .glitch-bar:nth-child(5) { top: 33%; animation-delay: 0.5s; height: 1px; }
+    .glitch-bar:nth-child(6) { top: 72%; animation-delay: 2.0s; }
 
-    @keyframes glitchBarMotion {
-      0%, 92%, 100% { opacity: 0; transform: translateX(-100%); }
-      94% { opacity: 0.85; transform: translateX(0); }
-      96% { opacity: 0; transform: translateX(100%); }
+    @keyframes barGlitch {
+      0%, 94%, 100% { opacity: 0; transform: translateX(-100%); }
+      95% { opacity: 0.9; transform: translateX(0); }
+      96.5% { opacity: 0; transform: translateX(100%); }
     }
 
-    /* small responsive correction for mobile */
-    @media (max-width: 700px) {
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
       .glitch-text {
-        font-size: 14vw;
-        letter-spacing: 5px;
+        font-size: 15vw;
+        letter-spacing: 6px;
         white-space: normal;
         word-break: keep-all;
+        line-height: 1.2;
       }
       .glitch-text::before,
       .glitch-text::after {
-        font-size: 14vw;
-        letter-spacing: 5px;
+        font-size: 15vw;
+        letter-spacing: 6px;
       }
-      .glitch-text {
-        padding: 0 8px;
-      }
+      .lava-blob:nth-child(1) { width: 300px; height: 300px; }
+      .lava-blob:nth-child(2) { width: 280px; height: 280px; }
+      .lava-blob:nth-child(3) { width: 350px; height: 350px; }
+      .lava-blob:nth-child(4) { width: 300px; height: 300px; }
+      .lava-blob:nth-child(5) { width: 260px; height: 260px; }
+      .lava-blob:nth-child(6) { width: 290px; height: 290px; }
+      .lava-blob:nth-child(7) { width: 250px; height: 250px; }
+      .lava-blob:nth-child(8) { width: 270px; height: 270px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND: NEON LIQUID MOTION — exactly like youtube video "moving like liquid with neon" 
-       Morphing blobs, fluid gradients, streaks, and high contrast blur, replicate the dynamic neon fluidity -->
-  <div class="neon-liquid">
-    <div class="fluid-layer fluid-layer-1"></div>
-    <div class="fluid-layer fluid-layer-2"></div>
-    <div class="fluid-layer fluid-layer-3"></div>
+  <!-- EXACT LIQUID LAVA LAMP BACKGROUND -->
+  <div class="liquid-background">
+    <!-- Main floating neon blobs (lava lamp style) -->
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
+    <div class="lava-blob"></div>
     
-    <div class="liquid-blob"></div>
-    <div class="liquid-blob"></div>
-    <div class="liquid-blob"></div>
-    <div class="liquid-blob"></div>
-    <div class="liquid-blob"></div>
-    
-    <div class="neon-streak streak-1"></div>
-    <div class="neon-streak streak-2"></div>
-    <div class="neon-flicker"></div>
+    <!-- Small droplets for extra fluid motion -->
+    <div class="droplet"></div>
+    <div class="droplet"></div>
+    <div class="droplet"></div>
+    <div class="droplet"></div>
   </div>
-  
-  <!-- subtle texture layers (preserve neon background beneath) -->
+
+  <!-- Texture overlays (dark, doesn't ruin the lava lamp effect) -->
   <div class="vignette"></div>
   <div class="scanlines"></div>
-  
-  <!-- glitch bars for extra analog feel -->
+
+  <!-- Glitch bars -->
   <div class="glitch-bar"></div>
   <div class="glitch-bar"></div>
   <div class="glitch-bar"></div>
   <div class="glitch-bar"></div>
   <div class="glitch-bar"></div>
   <div class="glitch-bar"></div>
-  
+
+  <!-- Pure white text container -->
   <div class="container">
     <div class="glitch-text">CIEL ON TOP</div>
   </div>
+
 </body>
 </html>
