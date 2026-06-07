@@ -20,161 +20,244 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background: #0a0a0a;
-    }
-
-    .title-container {
+      background: #000;
       position: relative;
-      display: inline-block;
     }
 
-    .title {
-      font-family: 'Anton', sans-serif;
-      font-size: 12vw;
-      color: white;
-      text-align: center;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 2;
-      
-      /* Bling shine effect */
-      background: linear-gradient(
-        120deg,
-        #ffffff 0%,
-        #ffffff 40%,
-        #ff0000 50%,
-        #ffffff 60%,
-        #ffffff 100%
-      );
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shine 2s infinite;
-    }
-
-    @keyframes shine {
-      0% { background-position: 100% 0; }
-      100% { background-position: -100% 0; }
-    }
-
-    /* Blood drips container */
-    .blood-drips {
+    /* Animated glitch background */
+    .bg-glitch {
       position: absolute;
-      bottom: -10px;
+      top: 0;
       left: 0;
       width: 100%;
-      height: 60px;
-      z-index: 1;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        #1a0a1a 0%,
+        #2d1a2d 20%,
+        #1a2d1a 40%,
+        #2d1a1a 60%,
+        #1a1a2d 80%,
+        #1a0a1a 100%
+      );
+      animation: bgShift 3s infinite;
+      filter: blur(2px) contrast(1.2);
+    }
+
+    @keyframes bgShift {
+      0% { filter: blur(2px) contrast(1.2) hue-rotate(0deg); }
+      25% { filter: blur(3px) contrast(1.4) hue-rotate(30deg); }
+      50% { filter: blur(1px) contrast(1.3) hue-rotate(-20deg); }
+      75% { filter: blur(4px) contrast(1.5) hue-rotate(40deg); }
+      100% { filter: blur(2px) contrast(1.2) hue-rotate(0deg); }
+    }
+
+    /* Noise overlay */
+    .noise {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      animation: noiseMove 0.5s infinite;
       pointer-events: none;
     }
 
-    /* Individual blood drops */
-    .drop {
+    @keyframes noiseMove {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -5%); }
+      20% { transform: translate(5%, 5%); }
+      30% { transform: translate(-5%, 5%); }
+      40% { transform: translate(5%, -5%); }
+      50% { transform: translate(-5%, 0%); }
+      60% { transform: translate(5%, 0%); }
+      70% { transform: translate(0%, 5%); }
+      80% { transform: translate(0%, -5%); }
+      90% { transform: translate(5%, 5%); }
+    }
+
+    /* Scan lines */
+    .scanlines {
       position: absolute;
-      background: #cc0000;
-      border-radius: 0 0 50% 50%;
-      animation: drip 2s infinite ease-in;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.3) 2px,
+        rgba(0, 0, 0, 0.3) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
     }
 
-    .drop:nth-child(1) {
-      left: 10%;
-      width: 8px;
-      height: 20px;
-      animation-delay: 0s;
-    }
-
-    .drop:nth-child(2) {
-      left: 25%;
-      width: 6px;
-      height: 35px;
-      animation-delay: 0.3s;
-    }
-
-    .drop:nth-child(3) {
-      left: 40%;
-      width: 10px;
-      height: 25px;
-      animation-delay: 0.6s;
-    }
-
-    .drop:nth-child(4) {
-      left: 55%;
-      width: 5px;
-      height: 40px;
-      animation-delay: 0.9s;
-    }
-
-    .drop:nth-child(5) {
-      left: 70%;
-      width: 7px;
-      height: 30px;
-      animation-delay: 1.2s;
-    }
-
-    .drop:nth-child(6) {
-      left: 85%;
-      width: 9px;
-      height: 22px;
-      animation-delay: 1.5s;
-    }
-
-    .drop:nth-child(7) {
-      left: 95%;
-      width: 6px;
-      height: 28px;
-      animation-delay: 1.8s;
-    }
-
-    @keyframes drip {
-      0%, 100% {
-        transform: translateY(0) scaleY(1);
-        opacity: 1;
-      }
-      50% {
-        transform: translateY(15px) scaleY(1.3);
-        opacity: 0.8;
-      }
-      80% {
-        transform: translateY(25px) scaleY(0.8);
-        opacity: 0.6;
-      }
-    }
-
-    /* Blood pool at bottom */
-    .blood-pool {
+    /* Moving scan line */
+    .scan-bar {
       position: absolute;
-      bottom: -15px;
-      left: 5%;
-      width: 90%;
-      height: 8px;
-      background: #cc0000;
-      border-radius: 50%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+      );
+      animation: scanMove 4s linear infinite;
+      pointer-events: none;
+      z-index: 11;
+    }
+
+    @keyframes scanMove {
+      0% { top: -10%; }
+      100% { top: 110%; }
+    }
+
+    /* Main container */
+    .container {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+    }
+
+    /* Chromatic aberration layers */
+    .glitch-text {
+      position: relative;
+      font-family: 'Anton', sans-serif;
+      font-size: 14vw;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 100, 100, 0.3);
+      animation: textGlitch 0.3s infinite;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: "CIEL ON TOP";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Anton', sans-serif;
+      font-size: 14vw;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+    }
+
+    .glitch-text::before {
+      color: #ff0000;
+      left: 3px;
+      text-shadow: -2px 0 #ff0000;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      animation: glitchRed 2s infinite linear alternate-reverse;
       opacity: 0.8;
-      animation: pool 2s infinite ease-in-out;
     }
 
-    @keyframes pool {
-      0%, 100% { transform: scaleX(1); opacity: 0.8; }
-      50% { transform: scaleX(1.1); opacity: 1; }
+    .glitch-text::after {
+      color: #00ffff;
+      left: -3px;
+      text-shadow: 2px 0 #00ffff;
+      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+      animation: glitchBlue 2s infinite linear alternate-reverse;
+      opacity: 0.8;
+    }
+
+    @keyframes textGlitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 2px); }
+      94% { transform: translate(2px, -2px); }
+      96% { transform: translate(-1px, 1px); }
+      98% { transform: translate(1px, -1px); }
+    }
+
+    @keyframes glitchRed {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-3px, 1px); }
+      40% { transform: translate(3px, -1px); }
+      60% { transform: translate(-2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+    }
+
+    @keyframes glitchBlue {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(3px, -1px); }
+      40% { transform: translate(-3px, 1px); }
+      60% { transform: translate(2px, -2px); }
+      80% { transform: translate(-2px, 2px); }
+    }
+
+    /* Horizontal glitch bars */
+    .glitch-bar {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      animation: glitchBar 3s infinite;
+    }
+
+    .glitch-bar:nth-child(1) { top: 20%; animation-delay: 0.5s; }
+    .glitch-bar:nth-child(2) { top: 40%; animation-delay: 1.2s; }
+    .glitch-bar:nth-child(3) { top: 60%; animation-delay: 2.1s; }
+    .glitch-bar:nth-child(4) { top: 80%; animation-delay: 0.8s; }
+
+    @keyframes glitchBar {
+      0%, 90%, 100% { opacity: 0; transform: translateX(-100%); }
+      92% { opacity: 0.8; transform: translateX(0); }
+      94% { opacity: 0; transform: translateX(100%); }
+    }
+
+    /* RGB shift overlay */
+    .rgb-shift {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.03) 0%,
+        transparent 33%,
+        transparent 66%,
+        rgba(0, 255, 255, 0.03) 100%
+      );
+      pointer-events: none;
+      z-index: 9;
+      animation: rgbMove 2s infinite;
+    }
+
+    @keyframes rgbMove {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
     }
   </style>
 </head>
 
 <body>
-  <div class="title-container">
-    <div class="title">CIEL ON TOP</div>
-    <div class="blood-drips">
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="drop"></div>
-      <div class="blood-pool"></div>
-    </div>
+  <div class="bg-glitch"></div>
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+  <div class="scan-bar"></div>
+  <div class="rgb-shift"></div>
+  
+  <div class="container">
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-text">CIEL ON TOP</div>
   </div>
 </body>
 </html>
