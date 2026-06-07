@@ -20,65 +20,119 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background: #000;
+      background: #0a0a0a;
       position: relative;
     }
 
-    /* Animated glitch background */
-    .bg-glitch {
+    /* Liquid blob background container */
+    .liquid-bg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        180deg,
-        #1a0a1a 0%,
-        #2d1a2d 20%,
-        #1a2d1a 40%,
-        #2d1a1a 60%,
-        #1a1a2d 80%,
-        #1a0a1a 100%
-      );
-      animation: bgShift 3s infinite;
-      filter: blur(2px) contrast(1.2);
+      filter: blur(60px) contrast(1.2);
+      overflow: hidden;
     }
 
-    @keyframes bgShift {
-      0% { filter: blur(2px) contrast(1.2) hue-rotate(0deg); }
-      25% { filter: blur(3px) contrast(1.4) hue-rotate(30deg); }
-      50% { filter: blur(1px) contrast(1.3) hue-rotate(-20deg); }
-      75% { filter: blur(4px) contrast(1.5) hue-rotate(40deg); }
-      100% { filter: blur(2px) contrast(1.2) hue-rotate(0deg); }
-    }
-
-    /* Noise overlay */
-    .noise {
+    /* Organic blobs */
+    .blob {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.15;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      animation: noiseMove 0.5s infinite;
-      pointer-events: none;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 15s infinite ease-in-out;
     }
 
-    @keyframes noiseMove {
-      0%, 100% { transform: translate(0, 0); }
-      10% { transform: translate(-5%, -5%); }
-      20% { transform: translate(5%, 5%); }
-      30% { transform: translate(-5%, 5%); }
-      40% { transform: translate(5%, -5%); }
-      50% { transform: translate(-5%, 0%); }
-      60% { transform: translate(5%, 0%); }
-      70% { transform: translate(0%, 5%); }
-      80% { transform: translate(0%, -5%); }
-      90% { transform: translate(5%, 5%); }
+    .blob:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: #39ff14;
+      top: -200px;
+      left: -100px;
+      animation-delay: 0s;
+      animation-duration: 20s;
     }
 
-    /* Scan lines */
+    .blob:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      background: #ffff00;
+      top: 50%;
+      right: -150px;
+      animation-delay: -5s;
+      animation-duration: 18s;
+    }
+
+    .blob:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      background: #ff6600;
+      bottom: -100px;
+      left: 20%;
+      animation-delay: -10s;
+      animation-duration: 22s;
+    }
+
+    .blob:nth-child(4) {
+      width: 350px;
+      height: 350px;
+      background: #ff1493;
+      top: 20%;
+      left: 40%;
+      animation-delay: -7s;
+      animation-duration: 16s;
+    }
+
+    .blob:nth-child(5) {
+      width: 450px;
+      height: 450px;
+      background: #7f00ff;
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -3s;
+      animation-duration: 25s;
+    }
+
+    .blob:nth-child(6) {
+      width: 300px;
+      height: 300px;
+      background: #00ff88;
+      top: 60%;
+      left: 10%;
+      animation-delay: -12s;
+      animation-duration: 19s;
+    }
+
+    .blob:nth-child(7) {
+      width: 550px;
+      height: 550px;
+      background: #ff4500;
+      top: -100px;
+      right: 20%;
+      animation-delay: -8s;
+      animation-duration: 21s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      }
+      25% {
+        transform: translate(50px, -50px) scale(1.1) rotate(90deg);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+      }
+      50% {
+        transform: translate(-30px, 30px) scale(0.9) rotate(180deg);
+        border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%;
+      }
+      75% {
+        transform: translate(40px, 20px) scale(1.05) rotate(270deg);
+        border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+      }
+    }
+
+    /* Scan lines overlay */
     .scanlines {
       position: absolute;
       top: 0;
@@ -89,58 +143,52 @@
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 0, 0, 0.3) 2px,
-        rgba(0, 0, 0, 0.3) 4px
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
       );
       pointer-events: none;
       z-index: 10;
     }
 
-    /* Moving scan line */
-    .scan-bar {
+    /* Vignette */
+    .vignette {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 10px;
-      background: linear-gradient(
-        180deg,
+      height: 100%;
+      background: radial-gradient(
+        circle at center,
         transparent 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 100%
+        transparent 50%,
+        rgba(0, 0, 0, 0.4) 100%
       );
-      animation: scanMove 4s linear infinite;
       pointer-events: none;
-      z-index: 11;
+      z-index: 5;
     }
 
-    @keyframes scanMove {
-      0% { top: -10%; }
-      100% { top: 110%; }
-    }
-
-    /* Main container */
+    /* Main text container */
     .container {
       position: relative;
-      z-index: 5;
+      z-index: 20;
       text-align: center;
     }
 
-    /* Chromatic aberration layers */
+    /* Pure white text with VHS glitch */
     .glitch-text {
       position: relative;
       font-family: 'Anton', sans-serif;
       font-size: 14vw;
-      color: white;
+      color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 8px;
       text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(255, 255, 255, 0.4),
-        0 0 40px rgba(255, 100, 100, 0.3);
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.3);
       animation: textGlitch 0.3s infinite;
     }
 
+    /* RGB split layers - subtle */
     .glitch-text::before,
     .glitch-text::after {
       content: "CIEL ON TOP";
@@ -153,48 +201,47 @@
       font-size: 14vw;
       text-transform: uppercase;
       letter-spacing: 8px;
+      color: #ffffff;
     }
 
     .glitch-text::before {
-      color: #ff0000;
-      left: 3px;
+      left: 2px;
       text-shadow: -2px 0 #ff0000;
       clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
       animation: glitchRed 2s infinite linear alternate-reverse;
-      opacity: 0.8;
+      opacity: 0.6;
     }
 
     .glitch-text::after {
-      color: #00ffff;
-      left: -3px;
+      left: -2px;
       text-shadow: 2px 0 #00ffff;
       clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
       animation: glitchBlue 2s infinite linear alternate-reverse;
-      opacity: 0.8;
+      opacity: 0.6;
     }
 
     @keyframes textGlitch {
       0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-2px, 2px); }
-      94% { transform: translate(2px, -2px); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
       96% { transform: translate(-1px, 1px); }
       98% { transform: translate(1px, -1px); }
     }
 
     @keyframes glitchRed {
       0%, 100% { transform: translate(0); }
-      20% { transform: translate(-3px, 1px); }
-      40% { transform: translate(3px, -1px); }
-      60% { transform: translate(-2px, 2px); }
-      80% { transform: translate(2px, -2px); }
+      20% { transform: translate(-2px, 1px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
     }
 
     @keyframes glitchBlue {
       0%, 100% { transform: translate(0); }
-      20% { transform: translate(3px, -1px); }
-      40% { transform: translate(-3px, 1px); }
-      60% { transform: translate(2px, -2px); }
-      80% { transform: translate(-2px, 2px); }
+      20% { transform: translate(2px, -1px); }
+      40% { transform: translate(-2px, 1px); }
+      60% { transform: translate(1px, -1px); }
+      80% { transform: translate(-1px, 1px); }
     }
 
     /* Horizontal glitch bars */
@@ -202,55 +249,38 @@
       position: absolute;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.5);
+      height: 3px;
+      background: rgba(255, 255, 255, 0.6);
       opacity: 0;
-      animation: glitchBar 3s infinite;
+      animation: glitchBar 2.5s infinite;
     }
 
-    .glitch-bar:nth-child(1) { top: 20%; animation-delay: 0.5s; }
-    .glitch-bar:nth-child(2) { top: 40%; animation-delay: 1.2s; }
-    .glitch-bar:nth-child(3) { top: 60%; animation-delay: 2.1s; }
-    .glitch-bar:nth-child(4) { top: 80%; animation-delay: 0.8s; }
+    .glitch-bar:nth-child(1) { top: 25%; animation-delay: 0.3s; }
+    .glitch-bar:nth-child(2) { top: 45%; animation-delay: 0.9s; }
+    .glitch-bar:nth-child(3) { top: 65%; animation-delay: 1.5s; }
+    .glitch-bar:nth-child(4) { top: 85%; animation-delay: 0.6s; }
 
     @keyframes glitchBar {
-      0%, 90%, 100% { opacity: 0; transform: translateX(-100%); }
-      92% { opacity: 0.8; transform: translateX(0); }
-      94% { opacity: 0; transform: translateX(100%); }
-    }
-
-    /* RGB shift overlay */
-    .rgb-shift {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 0, 0, 0.03) 0%,
-        transparent 33%,
-        transparent 66%,
-        rgba(0, 255, 255, 0.03) 100%
-      );
-      pointer-events: none;
-      z-index: 9;
-      animation: rgbMove 2s infinite;
-    }
-
-    @keyframes rgbMove {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(10px); }
+      0%, 95%, 100% { opacity: 0; transform: translateX(-100%); }
+      96% { opacity: 0.7; transform: translateX(0); }
+      97% { opacity: 0; transform: translateX(100%); }
     }
   </style>
 </head>
 
 <body>
-  <div class="bg-glitch"></div>
-  <div class="noise"></div>
+  <div class="liquid-bg">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+  
+  <div class="vignette"></div>
   <div class="scanlines"></div>
-  <div class="scan-bar"></div>
-  <div class="rgb-shift"></div>
   
   <div class="container">
     <div class="glitch-bar"></div>
