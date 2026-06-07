@@ -20,27 +20,44 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      position: relative;
 
-      /* Neon color switching every 1 sec */
       animation: bgSwitch 1s infinite;
     }
 
+    /* DARKER FLASH COLORS */
     @keyframes bgSwitch {
-      0%   { background: #ff00ff; }   /* neon pink */
-      20%  { background: #00ffff; }   /* neon cyan */
-      40%  { background: #39ff14; }   /* neon green */
-      60%  { background: #ff073a; }   /* neon red */
-      80%  { background: #7f00ff; }   /* neon purple */
-      100% { background: #ff00ff; }
+      0%   { background: #000000; }
+      20%  { background: #0a0a1a; }
+      40%  { background: #001a1a; }
+      60%  { background: #14001a; }
+      80%  { background: #001400; }
+      100% { background: #000000; }
+    }
+
+    /* SOFT BLUR LAYER */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      z-index: 0;
+
+      background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 60%);
+      filter: blur(80px);
     }
 
     .title {
       font-family: 'Anton', sans-serif;
-      font-size: 12vw; /* BIG like your image */
+      font-size: 13vw; /* BIGGER */
       color: white;
       text-align: center;
       letter-spacing: 4px;
       text-transform: uppercase;
+      position: relative;
+      z-index: 1;
     }
 
   </style>
