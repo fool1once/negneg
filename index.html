@@ -20,131 +20,152 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background: #0a0a0a;
+      background: #0d0510;
       position: relative;
     }
 
-    /* Liquid blob background container */
-    .liquid-bg {
+    /* Gooey liquid filter */
+    .liquid-container {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      filter: blur(60px) contrast(1.2);
+      filter: url('#goo') blur(25px);
       overflow: hidden;
     }
 
-    /* Organic blobs */
+    /* Individual blobs - various sizes */
     .blob {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.8;
-      animation: float 15s infinite ease-in-out;
+      animation: float 12s infinite ease-in-out;
     }
 
+    /* Green blobs */
     .blob:nth-child(1) {
-      width: 600px;
-      height: 600px;
+      width: 180px; height: 180px;
       background: #39ff14;
-      top: -200px;
-      left: -100px;
-      animation-delay: 0s;
-      animation-duration: 20s;
+      top: 10%; left: 5%;
+      animation-delay: 0s; animation-duration: 14s;
     }
-
     .blob:nth-child(2) {
-      width: 500px;
-      height: 500px;
-      background: #ffff00;
-      top: 50%;
-      right: -150px;
-      animation-delay: -5s;
-      animation-duration: 18s;
-    }
-
-    .blob:nth-child(3) {
-      width: 400px;
-      height: 400px;
-      background: #ff6600;
-      bottom: -100px;
-      left: 20%;
-      animation-delay: -10s;
-      animation-duration: 22s;
-    }
-
-    .blob:nth-child(4) {
-      width: 350px;
-      height: 350px;
-      background: #ff1493;
-      top: 20%;
-      left: 40%;
-      animation-delay: -7s;
-      animation-duration: 16s;
-    }
-
-    .blob:nth-child(5) {
-      width: 450px;
-      height: 450px;
-      background: #7f00ff;
-      bottom: 10%;
-      right: 10%;
-      animation-delay: -3s;
-      animation-duration: 25s;
-    }
-
-    .blob:nth-child(6) {
-      width: 300px;
-      height: 300px;
+      width: 120px; height: 120px;
       background: #00ff88;
-      top: 60%;
-      left: 10%;
-      animation-delay: -12s;
-      animation-duration: 19s;
+      top: 60%; left: 15%;
+      animation-delay: -2s; animation-duration: 16s;
+    }
+    .blob:nth-child(3) {
+      width: 200px; height: 200px;
+      background: #7fff00;
+      top: 30%; left: 80%;
+      animation-delay: -4s; animation-duration: 13s;
     }
 
+    /* Yellow/Orange blobs */
+    .blob:nth-child(4) {
+      width: 150px; height: 150px;
+      background: #ffff00;
+      top: 70%; left: 60%;
+      animation-delay: -1s; animation-duration: 15s;
+    }
+    .blob:nth-child(5) {
+      width: 100px; height: 100px;
+      background: #ffcc00;
+      top: 20%; left: 40%;
+      animation-delay: -3s; animation-duration: 17s;
+    }
+    .blob:nth-child(6) {
+      width: 170px; height: 170px;
+      background: #ff9900;
+      top: 80%; left: 30%;
+      animation-delay: -5s; animation-duration: 14s;
+    }
+
+    /* Orange/Red blobs */
     .blob:nth-child(7) {
-      width: 550px;
-      height: 550px;
+      width: 140px; height: 140px;
+      background: #ff6600;
+      top: 15%; left: 65%;
+      animation-delay: -2.5s; animation-duration: 16s;
+    }
+    .blob:nth-child(8) {
+      width: 110px; height: 110px;
       background: #ff4500;
-      top: -100px;
-      right: 20%;
-      animation-delay: -8s;
-      animation-duration: 21s;
+      top: 50%; left: 5%;
+      animation-delay: -4.5s; animation-duration: 13s;
+    }
+    .blob:nth-child(9) {
+      width: 190px; height: 190px;
+      background: #ff3300;
+      top: 75%; left: 75%;
+      animation-delay: -1.5s; animation-duration: 15s;
+    }
+
+    /* Pink/Purple blobs */
+    .blob:nth-child(10) {
+      width: 160px; height: 160px;
+      background: #ff1493;
+      top: 40%; left: 25%;
+      animation-delay: -3.5s; animation-duration: 14s;
+    }
+    .blob:nth-child(11) {
+      width: 130px; height: 130px;
+      background: #ff0066;
+      top: 5%; left: 55%;
+      animation-delay: -0.5s; animation-duration: 16s;
+    }
+    .blob:nth-child(12) {
+      width: 180px; height: 180px;
+      background: #7f00ff;
+      top: 55%; left: 45%;
+      animation-delay: -6s; animation-duration: 13s;
+    }
+    .blob:nth-child(13) {
+      width: 90px; height: 90px;
+      background: #9932cc;
+      top: 85%; left: 10%;
+      animation-delay: -2s; animation-duration: 18s;
+    }
+    .blob:nth-child(14) {
+      width: 220px; height: 220px;
+      background: #39ff14;
+      top: 25%; left: 50%;
+      animation-delay: -4s; animation-duration: 12s;
+    }
+    .blob:nth-child(15) {
+      width: 80px; height: 80px;
+      background: #ffff00;
+      top: 45%; left: 90%;
+      animation-delay: -1s; animation-duration: 19s;
     }
 
     @keyframes float {
       0%, 100% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: translate(0, 0) scale(1);
       }
       25% {
-        transform: translate(50px, -50px) scale(1.1) rotate(90deg);
-        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: translate(30px, -40px) scale(1.1);
       }
       50% {
-        transform: translate(-30px, 30px) scale(0.9) rotate(180deg);
-        border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%;
+        transform: translate(-20px, 20px) scale(0.9);
       }
       75% {
-        transform: translate(40px, 20px) scale(1.05) rotate(270deg);
-        border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+        transform: translate(40px, 30px) scale(1.05);
       }
     }
 
-    /* Scan lines overlay */
+    /* Scan lines - subtle */
     .scanlines {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: repeating-linear-gradient(
         0deg,
         transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.15) 2px,
-        rgba(0, 0, 0, 0.15) 4px
+        transparent 3px,
+        rgba(0, 0, 0, 0.08) 3px,
+        rgba(0, 0, 0, 0.08) 6px
       );
       pointer-events: none;
       z-index: 10;
@@ -153,79 +174,78 @@
     /* Vignette */
     .vignette {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: radial-gradient(
         circle at center,
-        transparent 0%,
-        transparent 50%,
-        rgba(0, 0, 0, 0.4) 100%
+        transparent 30%,
+        rgba(0, 0, 0, 0.5) 70%,
+        rgba(0, 0, 0, 0.8) 100%
       );
       pointer-events: none;
       z-index: 5;
     }
 
-    /* Main text container */
+    /* Main text */
     .container {
       position: relative;
       z-index: 20;
       text-align: center;
     }
 
-    /* Pure white text with VHS glitch */
+    /* Pure white text - FAST smooth glitch */
     .glitch-text {
       position: relative;
       font-family: 'Anton', sans-serif;
       font-size: 14vw;
       color: #ffffff;
       text-transform: uppercase;
-      letter-spacing: 8px;
+      letter-spacing: 10px;
       text-shadow: 
-        0 0 20px rgba(255, 255, 255, 0.5),
-        0 0 40px rgba(255, 255, 255, 0.3);
-      animation: textGlitch 0.3s infinite;
+        0 0 15px rgba(255, 255, 255, 0.6),
+        0 0 30px rgba(255, 255, 255, 0.3);
+      animation: textGlitch 0.15s infinite;
     }
 
-    /* RGB split layers - subtle */
+    /* RGB split layers */
     .glitch-text::before,
     .glitch-text::after {
       content: "CIEL ON TOP";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       font-family: 'Anton', sans-serif;
       font-size: 14vw;
       text-transform: uppercase;
-      letter-spacing: 8px;
+      letter-spacing: 10px;
       color: #ffffff;
     }
 
     .glitch-text::before {
       left: 2px;
       text-shadow: -2px 0 #ff0000;
-      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-      animation: glitchRed 2s infinite linear alternate-reverse;
-      opacity: 0.6;
+      clip-path: polygon(0 0, 100% 0, 100% 48%, 0 48%);
+      animation: glitchRed 0.8s infinite linear alternate-reverse;
+      opacity: 0.7;
     }
 
     .glitch-text::after {
       left: -2px;
       text-shadow: 2px 0 #00ffff;
-      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-      animation: glitchBlue 2s infinite linear alternate-reverse;
-      opacity: 0.6;
+      clip-path: polygon(0 52%, 100% 52%, 100% 100%, 0 100%);
+      animation: glitchBlue 0.8s infinite linear alternate-reverse;
+      opacity: 0.7;
     }
 
     @keyframes textGlitch {
-      0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-2px, 1px); }
-      94% { transform: translate(2px, -1px); }
-      96% { transform: translate(-1px, 1px); }
-      98% { transform: translate(1px, -1px); }
+      0%, 85%, 100% { transform: translate(0); filter: none; }
+      86% { transform: translate(-1px, 0.5px); filter: brightness(1.2); }
+      88% { transform: translate(1px, -0.5px); }
+      90% { transform: translate(-0.5px, 0.5px); }
+      92% { transform: translate(0.5px, -0.5px); }
+      94% { transform: translate(-1px, 1px); }
+      96% { transform: translate(1px, -1px); }
+      98% { transform: translate(-0.5px, 0); }
     }
 
     @keyframes glitchRed {
@@ -244,32 +264,70 @@
       80% { transform: translate(-1px, 1px); }
     }
 
-    /* Horizontal glitch bars */
+    /* Fast glitch bars */
     .glitch-bar {
       position: absolute;
       left: 0;
       width: 100%;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.6);
+      height: 2px;
+      background: rgba(255, 255, 255, 0.7);
       opacity: 0;
-      animation: glitchBar 2.5s infinite;
+      animation: glitchBar 1.5s infinite;
     }
 
-    .glitch-bar:nth-child(1) { top: 25%; animation-delay: 0.3s; }
-    .glitch-bar:nth-child(2) { top: 45%; animation-delay: 0.9s; }
-    .glitch-bar:nth-child(3) { top: 65%; animation-delay: 1.5s; }
-    .glitch-bar:nth-child(4) { top: 85%; animation-delay: 0.6s; }
+    .glitch-bar:nth-child(1) { top: 30%; animation-delay: 0.2s; }
+    .glitch-bar:nth-child(2) { top: 50%; animation-delay: 0.5s; }
+    .glitch-bar:nth-child(3) { top: 70%; animation-delay: 0.8s; }
+    .glitch-bar:nth-child(4) { top: 40%; animation-delay: 1.1s; }
 
     @keyframes glitchBar {
-      0%, 95%, 100% { opacity: 0; transform: translateX(-100%); }
-      96% { opacity: 0.7; transform: translateX(0); }
-      97% { opacity: 0; transform: translateX(100%); }
+      0%, 92%, 100% { opacity: 0; transform: translateX(-100%); }
+      93% { opacity: 0.8; transform: translateX(0); }
+      94% { opacity: 0; transform: translateX(100%); }
+      96% { opacity: 0.5; transform: translateX(-50%); }
+      97% { opacity: 0; transform: translateX(50%); }
+    }
+
+    /* Subtle noise */
+    .noise {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: noiseMove 0.5s infinite;
+      pointer-events: none;
+      z-index: 15;
+    }
+
+    @keyframes noiseMove {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-2%, -2%); }
     }
   </style>
 </head>
 
 <body>
-  <div class="liquid-bg">
+  <!-- SVG Filter for gooey effect -->
+  <svg style="position: absolute; width: 0; height: 0;">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur"/>
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"/>
+        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="liquid-container">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
     <div class="blob"></div>
     <div class="blob"></div>
     <div class="blob"></div>
@@ -281,6 +339,7 @@
   
   <div class="vignette"></div>
   <div class="scanlines"></div>
+  <div class="noise"></div>
   
   <div class="container">
     <div class="glitch-bar"></div>
