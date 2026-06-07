@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Servando // CRT Glitch Vision</title>
+  <title>Servando // CRT Glitch Collective</title>
 
-  <!-- Minimalist & bold typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <!-- bold typography + industrial retro -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none; /* keeps immersive feel */
+      user-select: none; /* immersive, raw feel */
     }
 
     body {
@@ -28,7 +28,7 @@
     }
 
     /* =========================
-       VIDEO BACKGROUND (CINEMATIC + GRIT)
+       CINEMATIC VIDEO BACKGROUND + GRIT
     ========================= */
     .video-bg {
       position: absolute;
@@ -48,7 +48,7 @@
       transition: filter 0.05s linear;
     }
 
-    /* Dark cinematic vignette + subtle CRT curvature */
+    /* dark vignette + CRT atmosphere */
     .overlay {
       position: absolute;
       top: 0;
@@ -61,7 +61,7 @@
       mix-blend-mode: multiply;
     }
 
-    /* Scanlines (authentic TV raster effect) */
+    /* authentic scanlines */
     .scanlines {
       position: absolute;
       width: 100%;
@@ -79,14 +79,14 @@
       opacity: 0.6;
     }
 
-    /* Old TV grain / noise texture (subtle static) */
+    /* grain texture */
     .grain {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.04) 1.2px, transparent 1.2px);
+      background-image: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.05) 1.2px, transparent 1.2px);
       background-size: 6px 6px;
       background-repeat: repeat;
       pointer-events: none;
@@ -96,7 +96,7 @@
       animation: subtleNoise 0.25s infinite;
     }
 
-    /* CRT inner shadow / curvature */
+    /* CRT inner curvature */
     .crt-curve {
       position: absolute;
       top: 0;
@@ -104,13 +104,12 @@
       width: 100%;
       height: 100%;
       box-shadow: inset 0 0 45px rgba(0,0,0,0.9), inset 0 0 15px rgba(0,0,0,0.5);
-      border-radius: 0px;
       pointer-events: none;
       z-index: 4;
     }
 
     /* =========================
-       GLITCH BARS (horizontal tracking lines / VHS style)
+       GLITCH BARS (VHS TRACKING)
     ========================= */
     .bar {
       position: absolute;
@@ -141,17 +140,24 @@
     }
 
     /* =========================
-       MAIN TEXT (ANTON + LAYERED GLITCH)
+       MAIN TEXT BLOCK (ALIGNED + STRUCTURED)
     ========================= */
     .container {
       position: relative;
       z-index: 10;
       text-align: center;
       width: 100%;
-      padding: 0 1rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
       pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
+    /* ----- MAIN GLITCH TITLE (SERVANDO) ----- */
     .glitch-text {
       font-family: 'Anton', sans-serif;
       font-size: 12vw;
@@ -166,9 +172,11 @@
       position: relative;
       display: inline-block;
       transform-origin: center;
+      margin-bottom: 0.1em;
+      line-height: 1.1;
     }
 
-    /* RGB split layers (old TV chromatic aberration) */
+    /* RGB split layers */
     .glitch-text::before,
     .glitch-text::after {
       content: "SERVANDO";
@@ -196,6 +204,108 @@
       animation: rgbShiftAfter 0.25s infinite alternate;
     }
 
+    /* ----- ONTOP SUBTITLE (POWER MOVE) ----- */
+    .subtitle {
+      font-family: 'Anton', sans-serif;
+      font-size: 4vw;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #f0f0f0;
+      text-shadow: 0 0 8px rgba(255, 80, 120, 0.8), 0 0 18px rgba(0, 180, 255, 0.4);
+      margin-top: 0.15em;
+      margin-bottom: 0.4em;
+      background: linear-gradient(135deg, #fff, #ddd);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: none;
+      position: relative;
+      display: inline-block;
+      animation: subtitleFlicker 3s infinite;
+    }
+    
+    /* extra glitch personality for ONTOP */
+    .subtitle::before {
+      content: "ONTOP";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: #ff66aa;
+      opacity: 0;
+      clip-path: polygon(0 30%, 100% 0%, 100% 70%, 0 100%);
+      animation: subtitleGhost 2.2s infinite alternate;
+    }
+
+    /* ----- NAMES / COLLECTIVE (clean alignment fix) ----- */
+    .names-collective {
+      margin-top: 1.2rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .name-strip {
+      font-family: 'Space Mono', 'Courier New', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #e6e6e6;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(2px);
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      box-shadow: 0 0 12px rgba(255, 70, 130, 0.3), inset 0 0 3px rgba(255,255,200,0.3);
+      word-break: break-word;
+      white-space: normal;
+      max-width: 95vw;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 120, 150, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    /* each name gets subtle spacing, fixing alignment for commas */
+    .name-strip span {
+      display: inline-block;
+      margin: 0 0.1rem;
+    }
+
+    /* responsive: better spacing on mobile */
+    @media (max-width: 700px) {
+      .glitch-text {
+        font-size: 15vw;
+        letter-spacing: 5px;
+      }
+      .subtitle {
+        font-size: 7vw;
+        letter-spacing: 3px;
+      }
+      .name-strip {
+        font-size: 0.85rem;
+        padding: 0.7rem 1rem;
+        letter-spacing: 0.5px;
+      }
+      .container {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .name-strip {
+        font-size: 0.7rem;
+        padding: 0.6rem 0.8rem;
+        line-height: 1.5;
+      }
+      .glitch-text {
+        letter-spacing: 3px;
+      }
+    }
+
+    /* =========================
+       GLITCH KEYFRAMES (TEXT & RGB)
+    ========================= */
     @keyframes textGlitchMove {
       0%, 88%, 100% { transform: translate(0, 0); }
       90% { transform: translate(-1.5px, 1px); }
@@ -215,7 +325,21 @@
       100% { transform: translate(-4px, 1px); clip-path: polygon(0 52%, 100% 52%, 100% 100%, 0 100%); }
     }
 
-    /* occasional full-frame flicker (CRT warmth) */
+    @keyframes subtitleGhost {
+      0% { opacity: 0; transform: translateX(-2px); }
+      100% { opacity: 0.7; transform: translateX(3px); text-shadow: -2px 0 #ff3366; }
+    }
+
+    @keyframes subtitleFlicker {
+      0%, 80%, 100% { opacity: 1; }
+      84% { opacity: 0.7; }
+      86% { opacity: 1; }
+      92% { opacity: 0.9; letter-spacing: 5px; }
+    }
+
+    /* =========================
+       CRT ATMOSPHERE LAYERS
+    ========================= */
     .flicker-overlay {
       position: absolute;
       top: 0;
@@ -236,73 +360,6 @@
       97% { opacity: 0.15; }
     }
 
-    /* =========================
-       HEAVY RANDOM GLITCH (TV SEIZURE / VHS DROP) 
-       JAVASCRIPT TRIGGERED - OLD TV CHAOS
-    ========================= */
-    .global-glitch {
-      animation: heavyCrashGlitch 0.12s cubic-bezier(0.2, 0.9, 0.8, 0.1) forwards !important;
-    }
-
-    .global-glitch .video-bg video {
-      filter: contrast(1.8) saturate(2) hue-rotate(8deg) brightness(0.6) !important;
-    }
-
-    .global-glitch .glitch-text {
-      animation: none;
-      transform: skewX(3deg) translateY(3px);
-      filter: blur(0.8px);
-    }
-
-    .global-glitch .glitch-text::before,
-    .global-glitch .glitch-text::after {
-      opacity: 0.9;
-      filter: blur(1px);
-    }
-
-    @keyframes heavyCrashGlitch {
-      0% {
-        transform: translate(0, 0);
-        filter: contrast(1) saturate(1);
-      }
-      20% {
-        transform: translate(8px, -4px) skewX(4deg);
-        filter: contrast(1.6) saturate(1.8) hue-rotate(12deg);
-      }
-      40% {
-        transform: translate(-10px, 5px) skewX(-3deg);
-        filter: contrast(1.9) saturate(2.2) hue-rotate(-8deg);
-      }
-      60% {
-        transform: translate(6px, -2px) skewX(2deg);
-        filter: contrast(1.2) saturate(1.4) hue-rotate(5deg);
-      }
-      80% {
-        transform: translate(-4px, 3px) skewX(-2deg);
-        filter: contrast(1.5) saturate(1.6) brightness(1.2);
-      }
-      100% {
-        transform: translate(0, 0);
-        filter: contrast(1) saturate(1);
-      }
-    }
-
-    /* flash for heavy glitch (white / cyan interference) */
-    .glitch-flash {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255,240,200,0.5) 0%, rgba(0,255,255,0.2) 100%);
-      mix-blend-mode: screen;
-      pointer-events: none;
-      z-index: 20;
-      opacity: 0;
-      transition: opacity 0.02s linear;
-    }
-
-    /* Additional quick jitter lines for extra realism */
     .extra-interference {
       position: absolute;
       top: 0;
@@ -327,7 +384,6 @@
       100% { background-position: 80px 0; }
     }
 
-    /* subtle pulse on screen edges */
     .vhs-pulse {
       position: absolute;
       inset: 0;
@@ -343,28 +399,76 @@
       100% { box-shadow: 0 0 15px rgba(255, 0, 80, 0.1) inset; }
     }
 
-    /* responsive text spacing */
-    @media (max-width: 768px) {
-      .glitch-text {
-        letter-spacing: 6px;
-      }
-      .bar:nth-child(2), .bar:nth-child(4) {
-        height: 2px;
-      }
+    /* =========================
+       HEAVY GLITCH EXTENSION FOR ALL TEXT (ALIGNMENT PROTECTED)
+    ========================= */
+    .global-glitch {
+      animation: heavyCrashGlitch 0.12s cubic-bezier(0.2, 0.9, 0.8, 0.1) forwards !important;
+    }
+
+    .global-glitch .video-bg video {
+      filter: contrast(1.8) saturate(2) hue-rotate(8deg) brightness(0.6) !important;
+    }
+
+    .global-glitch .glitch-text {
+      animation: none;
+      transform: skewX(3deg) translateY(3px);
+      filter: blur(0.8px);
+    }
+
+    .global-glitch .subtitle {
+      transform: skewX(2deg) translateX(4px);
+      filter: blur(0.6px);
+      letter-spacing: 0px;
+    }
+
+    .global-glitch .name-strip {
+      transform: skewX(-1.5deg) translateX(-3px);
+      filter: blur(0.4px);
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .global-glitch .glitch-text::before,
+    .global-glitch .glitch-text::after {
+      opacity: 0.9;
+      filter: blur(1px);
+    }
+
+    @keyframes heavyCrashGlitch {
+      0% { transform: translate(0, 0); filter: contrast(1) saturate(1); }
+      20% { transform: translate(8px, -4px) skewX(4deg); filter: contrast(1.6) saturate(1.8) hue-rotate(12deg); }
+      40% { transform: translate(-10px, 5px) skewX(-3deg); filter: contrast(1.9) saturate(2.2) hue-rotate(-8deg); }
+      60% { transform: translate(6px, -2px) skewX(2deg); filter: contrast(1.2) saturate(1.4) hue-rotate(5deg); }
+      80% { transform: translate(-4px, 3px) skewX(-2deg); filter: contrast(1.5) saturate(1.6) brightness(1.2); }
+      100% { transform: translate(0, 0); filter: contrast(1) saturate(1); }
+    }
+
+    .glitch-flash {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,240,200,0.5) 0%, rgba(0,255,255,0.2) 100%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      transition: opacity 0.02s linear;
     }
   </style>
 </head>
 <body>
 
-  <!-- VIDEO BACKGROUND (LAVA / CINEMATIC) -->
+  <!-- LAVA / CINEMATIC BACKGROUND -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="lava.mp4" type="video/mp4">
-      <!-- fallback text / transparency, but file assumed present -->
+      <!-- fallback texture is invisible but background black serves -->
     </video>
   </div>
 
-  <!-- LAYERS: old TV realism -->
+  <!-- CRT LAYERS: analog soul -->
   <div class="overlay"></div>
   <div class="scanlines"></div>
   <div class="grain"></div>
@@ -373,7 +477,7 @@
   <div class="extra-interference"></div>
   <div class="vhs-pulse"></div>
 
-  <!-- GLITCH BARS (tracking lines, white/colorful) -->
+  <!-- GLITCH BARS (tracking lines) -->
   <div class="bar"></div>
   <div class="bar"></div>
   <div class="bar"></div>
@@ -381,61 +485,90 @@
   <div class="bar"></div>
   <div class="bar"></div>
 
-  <!-- FLASH ELEMENT FOR HEAVY GLITCH -->
+  <!-- FLASH for heavy glitch -->
   <div class="glitch-flash" id="glitchFlash"></div>
 
-  <!-- MAIN TEXT : SERVANDO (glitch driven) -->
+  <!-- MAIN TEXT GROUP: ALIGNMENT FIXED & STRUCTURED -->
   <div class="container">
+    <!-- primary glitch name -->
     <div class="glitch-text">SERVANDO</div>
+    
+    <!-- ONTOP with extra retro style -->
+    <div class="subtitle">ONTOP</div>
+    
+    <!-- Collective names: alignment absolutely centered, comma separated clean -->
+    <div class="names-collective">
+      <div class="name-strip" id="nameList">
+        <!-- javascript will populate correctly to ensure perfect alignment and comma management -->
+      </div>
+    </div>
   </div>
 
   <script>
     (function() {
-      // --- OLD TV HEAVY GLITCH SIMULATOR (RANDOM INTERVALS) ---
-      // mimics vintage VHS tape drop, color shift, frame tear
+      // ========================
+      //  NAME LIST FROM IMAGE CONTEXT
+      //  "EYB,AERI,KELL,CIEL,SHANE,YHELL,ZENFLO,CHI,TATI,YE,MARY"
+      // ========================
+      const rawNames = "EYB, AERI, KELL, CIEL, SHANE, YHELL, ZENFLO, CHI, TATI, YE, MARY";
+      // we ensure proper spacing and display with inner spans for alignment & style consistency
+      const nameContainer = document.getElementById('nameList');
+      if (nameContainer) {
+        // split by commas and trim spaces
+        const namesArray = rawNames.split(',').map(n => n.trim());
+        // build with spans and commas between them (last no trailing comma)
+        nameContainer.innerHTML = '';
+        namesArray.forEach((name, idx) => {
+          const nameSpan = document.createElement('span');
+          nameSpan.textContent = name;
+          nameSpan.style.display = 'inline-block';
+          nameSpan.style.margin = '0 0.15rem';
+          nameSpan.style.fontWeight = '600';
+          nameContainer.appendChild(nameSpan);
+          if (idx < namesArray.length - 1) {
+            const commaSpan = document.createElement('span');
+            commaSpan.textContent = ', ';
+            commaSpan.style.display = 'inline-block';
+            commaSpan.style.marginRight = '0.1rem';
+            commaSpan.style.opacity = '0.85';
+            nameContainer.appendChild(commaSpan);
+          }
+        });
+        // extra polish: force upper case consistency
+      }
+
+      // --- OLD TV HEAVY GLITCH ENGINE (PRESERVE FULL INTENSITY) ---
       const bodyEl = document.body;
       const flashEl = document.getElementById('glitchFlash');
       
-      // function to trigger a heavy, crunchy glitch effect
       function triggerHeavyGlitch() {
-        // add class that triggers heavy distortion
         bodyEl.classList.add('global-glitch');
-        
-        // flash effect: white+cyan quick burst
         if (flashEl) {
           flashEl.style.opacity = '0.65';
           setTimeout(() => {
             if (flashEl) flashEl.style.opacity = '0';
           }, 55);
         }
-        
-        // additional aggressive micro-shake for the text container? just stays with global class
-        // remove glitch class after short duration (feels like analog interference)
         setTimeout(() => {
           bodyEl.classList.remove('global-glitch');
-        }, 130); // short but intense
-        
-        // sometimes double-hit? extra random spark? no need, but keep natural
+        }, 130);
       }
       
-      // random interval between heavy glitches (between 2.5 and 8 seconds)
+      // random heavy glitch schedule (2.8 - 8.2 sec)
       let glitchTimeout;
-      
       function scheduleGlitch() {
-        const minDelay = 2800;   // 2.8 sec
-        const maxDelay = 8200;   // 8.2 sec
+        const minDelay = 2800;
+        const maxDelay = 8200;
         const nextGlitchIn = Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
         glitchTimeout = setTimeout(() => {
           triggerHeavyGlitch();
-          scheduleGlitch(); // recursive scheduling for continuous old TV feeling
+          scheduleGlitch();
         }, nextGlitchIn);
       }
       
-      // Also trigger an extra "micro glitch" sometimes in between? gives more organic TV feel
-      // but we also can create minor interference without full heavy crash
+      // micro glitch texture (subtle interference, color shift)
       function subtleInterference() {
-        if (Math.random() > 0.68) return; // 32% chance
-        // quick micro flicker / color shift without full heavy class
+        if (Math.random() > 0.68) return;
         const tempOverlay = document.createElement('div');
         tempOverlay.style.position = 'absolute';
         tempOverlay.style.top = '0';
@@ -448,21 +581,25 @@
         tempOverlay.style.zIndex = '25';
         document.body.appendChild(tempOverlay);
         
-        // also skew text container very briefly
         const textContainer = document.querySelector('.glitch-text');
+        const subtitleEl = document.querySelector('.subtitle');
         if (textContainer) {
-          textContainer.style.transform = 'skewX(1.5deg) translateX(2px)';
+          textContainer.style.transform = 'skewX(1.2deg) translateX(2px)';
           setTimeout(() => {
             if (textContainer) textContainer.style.transform = '';
           }, 45);
         }
-        
+        if (subtitleEl) {
+          subtitleEl.style.transform = 'skewX(0.8deg) translateX(-1px)';
+          setTimeout(() => {
+            if (subtitleEl) subtitleEl.style.transform = '';
+          }, 40);
+        }
         setTimeout(() => {
           if (tempOverlay && tempOverlay.remove) tempOverlay.remove();
         }, 50);
       }
       
-      // random micro glitches (every 1.2 - 3 seconds) for extra texture
       let microInterval;
       function startMicroGlitchRain() {
         microInterval = setInterval(() => {
@@ -470,7 +607,7 @@
         }, 1900);
       }
       
-      // additional: occasional single bar flash (like tracking noise) to increase authenticity
+      // random bar flash (extra tracking noise)
       function randomBarFlash() {
         const bars = document.querySelectorAll('.bar');
         if (bars.length) {
@@ -491,7 +628,6 @@
         }
       }
       
-      // set occasional extra bar disruption (every 2-5 secs)
       let barInterval;
       function startBarDisruption() {
         barInterval = setInterval(() => {
@@ -501,8 +637,7 @@
         }, 2300);
       }
       
-      // subtle scanline intensity modulation (vintage effect)
-      let scanlineMod = true;
+      // scanline intensity modulation
       function varyScanlineOpac() {
         const scan = document.querySelector('.scanlines');
         if (scan) {
@@ -517,27 +652,34 @@
         if (Math.random() > 0.8) varyScanlineOpac();
       }, 3200);
       
-      // Sync with video to ensure it runs smooth (if video fails, still fine)
+      // video handling
       const videoEl = document.querySelector('video');
       if (videoEl) {
-        videoEl.play().catch(e => console.log('video autoplay blocked, but effect remains'));
+        videoEl.play().catch(e => console.log('video autoplay blocked, visual still works'));
       }
       
-      // START GLITCH MACHINE: old TV feels alive
+      // start chaos engines
       scheduleGlitch();
       startMicroGlitchRain();
       startBarDisruption();
       
-      // ensure that after user click/tap (for mobile) no interruption, just for safety
-      // also cleanup if needed (no big memory leaks)
-      window.addEventListener('beforeunload', () => {
-        if (glitchTimeout) clearTimeout(glitchTimeout);
-        if (microInterval) clearInterval(microInterval);
-        if (barInterval) clearInterval(barInterval);
-      });
+      // additional flicker on name-strip sometimes (alignment friendly)
+      function nameStripFlicker() {
+        const nameStrip = document.querySelector('.name-strip');
+        if (nameStrip && Math.random() > 0.8) {
+          nameStrip.style.transform = 'translateX(2px)';
+          nameStrip.style.opacity = '0.9';
+          setTimeout(() => {
+            if (nameStrip) {
+              nameStrip.style.transform = '';
+              nameStrip.style.opacity = '';
+            }
+          }, 30);
+        }
+      }
+      setInterval(nameStripFlicker, 2400);
       
-      // bonus: add random rgb shadow flicker on text for extra rawness
-      let textShadowMod = true;
+      // text shadow micro-glitch for SERVANDO (maintained)
       function textShadowFlicker() {
         const glitchElem = document.querySelector('.glitch-text');
         if (glitchElem && Math.random() > 0.75) {
@@ -546,15 +688,13 @@
           const b = Math.floor(Math.random() * 40);
           glitchElem.style.textShadow = `0 0 6px rgba(255,${100+r},${80+r},0.9), 0 0 18px rgba(${r},${g},255,0.7)`;
           setTimeout(() => {
-            if (glitchElem) {
-              glitchElem.style.textShadow = '';
-            }
+            if (glitchElem) glitchElem.style.textShadow = '';
           }, 70);
         }
       }
       setInterval(textShadowFlicker, 1700);
       
-      // extra VHS color bleeding effect: sometimes apply slight filter to video
+      // video color bleeding effect
       function videoColorBleed() {
         if (videoEl && Math.random() > 0.85) {
           videoEl.style.filter = 'contrast(1.4) saturate(1.6) hue-rotate(3deg) brightness(0.7)';
@@ -565,8 +705,34 @@
       }
       setInterval(videoColorBleed, 2800);
       
-      // quick callback to make body never overflow, ensure retro feel
-      console.log('🧪 OLD TV GLITCH ACTIVE — SERVANDO // 3AM AESTHETIC');
+      // final alignment & safety: ensure name strip never overflows or breaks container badly
+      window.addEventListener('resize', () => {
+        const containerDiv = document.querySelector('.container');
+        if (containerDiv) {
+          // just forced reflow not needed, but keep responsive
+        }
+      });
+      
+      // prevent text clipping: if any overflow due to extreme scaling (just protection)
+      const styleCheck = () => {
+        const nameStrip = document.querySelector('.name-strip');
+        if (nameStrip && nameStrip.scrollWidth > window.innerWidth - 40) {
+          nameStrip.style.fontSize = '0.75rem';
+        } else if (nameStrip) {
+          nameStrip.style.fontSize = '';
+        }
+      };
+      setTimeout(styleCheck, 100);
+      window.addEventListener('resize', styleCheck);
+      
+      // clean memory on unload
+      window.addEventListener('beforeunload', () => {
+        if (glitchTimeout) clearTimeout(glitchTimeout);
+        if (microInterval) clearInterval(microInterval);
+        if (barInterval) clearInterval(barInterval);
+      });
+      
+      console.log('🎥 CRT GLITCH ACTIVE // SERVANDO · ONTOP · COLLECTIVE ALIGNMENT FIXED');
     })();
   </script>
 </body>
