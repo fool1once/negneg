@@ -1,325 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIEL ON TOP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIEL ON TOP</title>
 
-        body {
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            background: #0a0a0a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Anton', sans-serif;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
-        /* Realistic Liquid Background */
-        .liquid-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: radial-gradient(ellipse at center, #1a0a2e 0%, #0a0a0a 100%);
-            filter: contrast(1.2) brightness(1.1);
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .liquid-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(8px);
-            opacity: 0.85;
-            animation: 
-                float 25s infinite ease-in-out,
-                morph 15s infinite ease-in-out,
-                drift 30s infinite linear;
-        }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: #0a0a0a;
+      position: relative;
+    }
 
-        /* Large liquid masses - realistic sizes */
-        .blob-1 {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle at 30% 30%, #00ff88, #00aa55, #006633);
-            left: -150px;
-            top: 10%;
-            animation-delay: 0s, 0s, 0s;
-        }
+    /* Liquid blob background container */
+    .liquid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      filter: blur(60px) contrast(1.2);
+      overflow: hidden;
+    }
 
-        .blob-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle at 40% 40%, #ffdd00, #ffaa00, #cc7700);
-            right: -100px;
-            top: 20%;
-            animation-delay: -5s, -3s, -10s;
-        }
+    /* Organic blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 15s infinite ease-in-out;
+    }
 
-        .blob-3 {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle at 35% 35%, #ff6b35, #ff4500, #cc3300);
-            left: 30%;
-            bottom: -100px;
-            animation-delay: -10s, -6s, -20s;
-        }
+    .blob:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: #39ff14;
+      top: -200px;
+      left: -100px;
+      animation-delay: 0s;
+      animation-duration: 20s;
+    }
 
-        .blob-4 {
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle at 25% 25%, #ff1493, #ff0066, #cc0052);
-            right: 20%;
-            top: -150px;
-            animation-delay: -15s, -9s, -5s;
-        }
+    .blob:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      background: #ffff00;
+      top: 50%;
+      right: -150px;
+      animation-delay: -5s;
+      animation-duration: 18s;
+    }
 
-        .blob-5 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle at 30% 30%, #9932cc, #7700aa, #550077);
-            left: 10%;
-            bottom: 10%;
-            animation-delay: -8s, -12s, -15s;
-        }
+    .blob:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      background: #ff6600;
+      bottom: -100px;
+      left: 20%;
+      animation-delay: -10s;
+      animation-duration: 22s;
+    }
 
-        .blob-6 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle at 40% 40%, #00ced1, #0099aa, #006677);
-            right: 5%;
-            bottom: 20%;
-            animation-delay: -12s, -15s, -25s;
-        }
+    .blob:nth-child(4) {
+      width: 350px;
+      height: 350px;
+      background: #ff1493;
+      top: 20%;
+      left: 40%;
+      animation-delay: -7s;
+      animation-duration: 16s;
+    }
 
-        .blob-7 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle at 35% 35%, #ff69b4, #ff1493, #cc0066);
-            left: 50%;
-            top: 40%;
-            animation-delay: -3s, -7s, -8s;
-        }
+    .blob:nth-child(5) {
+      width: 450px;
+      height: 450px;
+      background: #7f00ff;
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -3s;
+      animation-duration: 25s;
+    }
 
-        .blob-8 {
-            width: 480px;
-            height: 480px;
-            background: radial-gradient(circle at 30% 30%, #7fff00, #55cc00, #339900);
-            left: 60%;
-            bottom: -80px;
-            animation-delay: -18s, -10s, -12s;
-        }
+    .blob:nth-child(6) {
+      width: 300px;
+      height: 300px;
+      background: #00ff88;
+      top: 60%;
+      left: 10%;
+      animation-delay: -12s;
+      animation-duration: 19s;
+    }
 
-        /* Secondary smaller blobs for detail */
-        .blob-small {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(5px);
-            opacity: 0.7;
-        }
+    .blob:nth-child(7) {
+      width: 550px;
+      height: 550px;
+      background: #ff4500;
+      top: -100px;
+      right: 20%;
+      animation-delay: -8s;
+      animation-duration: 21s;
+    }
 
-        .blob-s1 {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, #ffff00, #ccaa00);
-            left: 40%;
-            top: 60%;
-            animation: float 20s infinite ease-in-out, morph 12s infinite ease-in-out;
-        }
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      }
+      25% {
+        transform: translate(50px, -50px) scale(1.1) rotate(90deg);
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+      }
+      50% {
+        transform: translate(-30px, 30px) scale(0.9) rotate(180deg);
+        border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%;
+      }
+      75% {
+        transform: translate(40px, 20px) scale(1.05) rotate(270deg);
+        border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+      }
+    }
 
-        .blob-s2 {
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, #ff00ff, #aa00aa);
-            right: 30%;
-            top: 70%;
-            animation: float 22s infinite ease-in-out, morph 14s infinite ease-in-out;
-            animation-delay: -7s, -5s;
-        }
+    /* Scan lines overlay */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 10;
+    }
 
-        .blob-s3 {
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle, #00ffff, #00aaaa);
-            left: 20%;
-            top: 30%;
-            animation: float 18s infinite ease-in-out, morph 10s infinite ease-in-out;
-            animation-delay: -12s, -8s;
-        }
+    /* Vignette */
+    .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
+      pointer-events: none;
+      z-index: 5;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(80px, -60px) scale(1.1); }
-            50% { transform: translate(-40px, 80px) scale(0.95); }
-            75% { transform: translate(60px, 40px) scale(1.05); }
-        }
+    /* Main text container */
+    .container {
+      position: relative;
+      z-index: 20;
+      text-align: center;
+    }
 
-        @keyframes morph {
-            0%, 100% { 
-                border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
-            }
-            20% { 
-                border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%;
-            }
-            40% { 
-                border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
-            }
-            60% { 
-                border-radius: 55% 45% 40% 60% / 60% 40% 55% 45%;
-            }
-            80% { 
-                border-radius: 40% 60% 45% 55% / 50% 60% 40% 60%;
-            }
-        }
+    /* Pure white text with VHS glitch */
+    .glitch-text {
+      position: relative;
+      font-family: 'Anton', sans-serif;
+      font-size: 14vw;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(255, 255, 255, 0.3);
+      animation: textGlitch 0.3s infinite;
+    }
 
-        @keyframes drift {
-            0% { transform: rotate(0deg) translateX(0); }
-            100% { transform: rotate(360deg) translateX(50px); }
-        }
+    /* RGB split layers - subtle */
+    .glitch-text::before,
+    .glitch-text::after {
+      content: "CIEL ON TOP";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Anton', sans-serif;
+      font-size: 14vw;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      color: #ffffff;
+    }
 
-        /* SVG Gooey Filter for liquid merging effect */
-        .gooey-filter {
-            position: absolute;
-            width: 0;
-            height: 0;
-        }
+    .glitch-text::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff0000;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      animation: glitchRed 2s infinite linear alternate-reverse;
+      opacity: 0.6;
+    }
 
-        .liquid-content {
-            position: relative;
-            z-index: 1;
-            filter: url('#goo');
-        }
+    .glitch-text::after {
+      left: -2px;
+      text-shadow: 2px 0 #00ffff;
+      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+      animation: glitchBlue 2s infinite linear alternate-reverse;
+      opacity: 0.6;
+    }
 
-        /* Text styling */
-        .glitch-text {
-            font-size: clamp(4rem, 15vw, 12rem);
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            position: relative;
-            text-shadow: 
-                0 0 20px rgba(255,255,255,0.5),
-                0 0 40px rgba(255,255,255,0.3),
-                0 0 60px rgba(255,255,255,0.2);
-            animation: textGlitch 0.15s infinite;
-            z-index: 10;
-        }
+    @keyframes textGlitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, 1px); }
+      98% { transform: translate(1px, -1px); }
+    }
 
-        @keyframes textGlitch {
-            0% { 
-                transform: translate(0); 
-                text-shadow: 2px 0 #ff0000, -2px 0 #00ffff;
-            }
-            20% { 
-                transform: translate(-2px, 2px); 
-                text-shadow: -2px 0 #ff0000, 2px 0 #00ffff;
-            }
-            40% { 
-                transform: translate(2px, -2px); 
-                text-shadow: 3px 0 #00ff00, -3px 0 #ff00ff;
-            }
-            60% { 
-                transform: translate(-1px, 1px); 
-                text-shadow: -1px 0 #ffff00, 1px 0 #ff00ff;
-            }
-            80% { 
-                transform: translate(1px, -1px); 
-                text-shadow: 1px 0 #ff0000, -1px 0 #00ffff;
-            }
-            100% { 
-                transform: translate(0); 
-                text-shadow: 2px 0 #ff0000, -2px 0 #00ffff;
-            }
-        }
+    @keyframes glitchRed {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(-2px, 1px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+    }
 
-        /* Scanlines overlay */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0,0,0,0.15),
-                rgba(0,0,0,0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 5;
-        }
+    @keyframes glitchBlue {
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(2px, -1px); }
+      40% { transform: translate(-2px, 1px); }
+      60% { transform: translate(1px, -1px); }
+      80% { transform: translate(-1px, 1px); }
+    }
 
-        /* Vignette */
-        .vignette {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
-            pointer-events: none;
-            z-index: 6;
-        }
+    /* Horizontal glitch bars */
+    .glitch-bar {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      animation: glitchBar 2.5s infinite;
+    }
 
-        /* Noise texture */
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 7;
-        }
-    </style>
+    .glitch-bar:nth-child(1) { top: 25%; animation-delay: 0.3s; }
+    .glitch-bar:nth-child(2) { top: 45%; animation-delay: 0.9s; }
+    .glitch-bar:nth-child(3) { top: 65%; animation-delay: 1.5s; }
+    .glitch-bar:nth-child(4) { top: 85%; animation-delay: 0.6s; }
+
+    @keyframes glitchBar {
+      0%, 95%, 100% { opacity: 0; transform: translateX(-100%); }
+      96% { opacity: 0.7; transform: translateX(0); }
+      97% { opacity: 0; transform: translateX(100%); }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- SVG Filter for Gooey Effect -->
-    <svg class="gooey-filter">
-        <defs>
-            <filter id="goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-            </filter>
-        </defs>
-    </svg>
-
-    <!-- Liquid Background -->
-    <div class="liquid-container">
-        <div class="liquid-content">
-            <div class="liquid-blob blob-1"></div>
-            <div class="liquid-blob blob-2"></div>
-            <div class="liquid-blob blob-3"></div>
-            <div class="liquid-blob blob-4"></div>
-            <div class="liquid-blob blob-5"></div>
-            <div class="liquid-blob blob-6"></div>
-            <div class="liquid-blob blob-7"></div>
-            <div class="liquid-blob blob-8"></div>
-            <div class="blob-small blob-s1"></div>
-            <div class="blob-small blob-s2"></div>
-            <div class="blob-small blob-s3"></div>
-        </div>
-    </div>
-
-    <!-- Effects Overlays -->
-    <div class="scanlines"></div>
-    <div class="vignette"></div>
-    <div class="noise"></div>
-
-    <!-- Main Text -->
-    <h1 class="glitch-text">CIEL ON TOP</h1>
+  <div class="liquid-bg">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+  
+  <div class="vignette"></div>
+  <div class="scanlines"></div>
+  
+  <div class="container">
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-bar"></div>
+    <div class="glitch-text">CIEL ON TOP</div>
+  </div>
 </body>
 </html>
