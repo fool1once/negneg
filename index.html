@@ -1,131 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>SERVANDO ON TOP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SERVANDO ON TOP</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body{
-  height:100vh;
-  width:100%;
-  overflow:hidden;
-  background:#000;
-  font-family:'Anton',sans-serif;
-}
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* =======================
-   VIDEO BACKGROUND
-======================= */
-.video-bg{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:-2;
+    /* =========================
+       VIDEO BACKGROUND
+    ========================= */
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
 
-  filter: blur(18px) saturate(1.6) contrast(1.2) brightness(0.6);
-  transform: scale(1.1);
-}
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.2) saturate(1.1) brightness(0.8);
+    }
 
-/* DARK OVERLAY */
-.overlay{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.75) 100%);
-}
+    /* dark cinematic overlay */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+    }
 
-/* =======================
-   TEXT
-======================= */
-.container{
-  position:relative;
-  z-index:10;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+    /* scanlines (TV effect) */
+    .scanlines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px,
+        transparent 4px
+      );
+      z-index: 2;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
 
-.glitch-text{
-  font-size:12vw;
-  color:#fff;
-  letter-spacing:18px;
-  text-transform:uppercase;
-  position:relative;
+    /* =========================
+       TEXT
+    ========================= */
+    .container {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+    }
 
-  text-shadow:
-    0 0 15px rgba(255,255,255,0.8),
-    0 0 40px rgba(255,255,255,0.3);
+    .glitch-text {
+      font-family: 'Anton', sans-serif;
+      font-size: 12vw;
+      color: white;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 15px rgba(255,255,255,0.8),
+        0 0 35px rgba(255,255,255,0.4);
+      animation: glitch 0.3s infinite;
+      position: relative;
+    }
 
-  animation:glitch 0.3s infinite;
-}
+    /* RGB glitch layers */
+    .glitch-text::before,
+    .glitch-text::after {
+      content: "SERVANDO";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: white;
+      opacity: 0.6;
+    }
 
-/* glitch layers */
-.glitch-text::before,
-.glitch-text::after{
-  content:"SERVANDO";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  color:#fff;
-}
+    .glitch-text::before {
+      transform: translate(2px, 0);
+      text-shadow: -2px 0 red;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
 
-.glitch-text::before{
-  transform:translate(-2px,0);
-  opacity:0.5;
-  clip-path:polygon(0 0,100% 0,100% 40%,0 40%);
-}
+    .glitch-text::after {
+      transform: translate(-2px, 0);
+      text-shadow: 2px 0 cyan;
+      clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    }
 
-.glitch-text::after{
-  transform:translate(2px,0);
-  opacity:0.5;
-  clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);
-}
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, 1px); }
+      98% { transform: translate(1px, -1px); }
+    }
 
-@keyframes glitch{
-  0%,100%{transform:translate(0,0);}
-  25%{transform:translate(-1px,1px);}
-  50%{transform:translate(1px,-1px);}
-  75%{transform:translate(-1px,0);}
-}
+    /* glitch bars */
+    .bar {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: white;
+      opacity: 0;
+      z-index: 4;
+      animation: bar 2.5s infinite;
+    }
 
-/* MOBILE */
-@media(max-width:768px){
-  .glitch-text{
-    font-size:18vw;
-    letter-spacing:6px;
-  }
-}
-</style>
+    .bar:nth-child(1) { top: 20%; animation-delay: 0.2s; }
+    .bar:nth-child(2) { top: 40%; animation-delay: 1s; }
+    .bar:nth-child(3) { top: 60%; animation-delay: 0.6s; }
+    .bar:nth-child(4) { top: 80%; animation-delay: 1.4s; }
+
+    @keyframes bar {
+      0%, 95%, 100% { opacity: 0; transform: translateX(-100%); }
+      96% { opacity: 0.8; transform: translateX(0); }
+      97% { opacity: 0; transform: translateX(100%); }
+    }
+
+  </style>
 </head>
 
 <body>
 
-<!-- 🔥 BACKGROUND VIDEO (PUT YOUR FILE NAME HERE) -->
-<video autoplay muted loop playsinline class="video-bg">
-  <source src="lava.mp4" type="video/mp4">
-</video>
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="lava.mp4" type="video/mp4">
+    </video>
+  </div>
 
-<!-- DARK LAYER -->
-<div class="overlay"></div>
+  <div class="overlay"></div>
+  <div class="scanlines"></div>
 
-<!-- TEXT -->
-<div class="container">
-  <div class="glitch-text">SERVANDO</div>
-</div>
+  <!-- glitch bars -->
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+
+  <!-- TEXT -->
+  <div class="container">
+    <div class="glitch-text">SERVANDO</div>
+  </div>
 
 </body>
 </html>
